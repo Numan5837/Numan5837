@@ -9,8 +9,8 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "assets" / "header.gif"
 WIDTH, HEIGHT = 1200, 340
-FPS = 8
-SECONDS = 8
+FPS = 12
+SECONDS = 16
 FRAME_COUNT = FPS * SECONDS
 
 
@@ -27,9 +27,11 @@ def font(name: str, size: int) -> ImageFont.FreeTypeFont:
 
 FONT_NAME = font("segoeuib.ttf", 60)
 FONT_SUBTITLE = font("segoeui.ttf", 22)
-FONT_MONO = font("consola.ttf", 16)
-FONT_MONO_BOLD = font("consolab.ttf", 16)
-FONT_MONO_SMALL = font("consola.ttf", 13)
+FONT_MONO = font("consola.ttf", 18)
+FONT_MONO_BOLD = font("consolab.ttf", 18)
+FONT_MONO_SMALL = font("consola.ttf", 16)
+FONT_TYPEWRITER = font("consolab.ttf", 23)
+FONT_STATUS = font("consolab.ttf", 18)
 
 
 def mix(a: tuple[int, int, int], b: tuple[int, int, int], amount: float) -> tuple[int, int, int]:
@@ -98,13 +100,15 @@ def draw_static() -> Image.Image:
 
     draw.text((66, 117), "Numan S.", font=FONT_NAME, fill=(244, 248, 253, 255), stroke_width=1, stroke_fill=(244, 248, 253, 255))
     draw.rounded_rectangle((66, 190, 595, 194), radius=2, fill=(80, 108, 139, 255))
-    draw.text((66, 213), "Agent evaluation · Verifier engineering · Cloud-native systems", font=FONT_SUBTITLE, fill=(193, 208, 223, 255))
-    draw.text((66, 254), "> exact grading  /  reproducible runs  /  failure analysis", font=FONT_MONO_SMALL, fill=(102, 144, 180, 255))
+    draw.text((66, 213), "Agent evaluation · Verifiers · Cloud systems", font=FONT_SUBTITLE, fill=(193, 208, 223, 255))
+
+    draw.rounded_rectangle((66, 244, 650, 282), radius=10, fill=(7, 20, 34, 245), outline=(48, 75, 103, 255), width=2)
+    draw.text((82, 249), ">", font=FONT_TYPEWRITER, fill=(85, 230, 204, 255))
 
     chips = [
-        (66, 285, 166, "Python", (93, 231, 207)),
-        (178, 285, 278, "Docker", (111, 175, 255)),
-        (290, 285, 400, "Harbor", (188, 157, 255)),
+        (66, 291, 166, "Python", (93, 231, 207)),
+        (178, 291, 278, "Docker", (111, 175, 255)),
+        (290, 291, 400, "Harbor", (188, 157, 255)),
     ]
     for x1, y1, x2, label, color in chips:
         draw.rounded_rectangle((x1, y1, x2, y1 + 37), radius=18, fill=(11, 31, 49, 255), outline=(48, 77, 103, 255))
@@ -120,13 +124,13 @@ def draw_static() -> Image.Image:
     draw.ellipse((691, 50, 701, 60), fill=(255, 105, 122, 255))
     draw.ellipse((710, 50, 720, 60), fill=(242, 201, 76, 255))
     draw.ellipse((729, 50, 739, 60), fill=(85, 230, 165, 255))
-    draw.text((758, 47), "validate / replica-reconciliation", font=FONT_MONO_SMALL, fill=(139, 171, 201, 255))
+    draw.text((758, 46), "validate / replica-reconcile", font=FONT_MONO_SMALL, fill=(166, 193, 218, 255))
 
     labels = ["docker validation", "oracle reward", "no-op reward", "GPT-5.6 Sol"]
     for index, label in enumerate(labels):
         y = 88 + index * 36
         draw.text((702, y), label, font=FONT_MONO, fill=(153, 175, 197, 255))
-        draw.line((860, y + 13, 1037, y + 13), fill=(42, 66, 87, 255), width=1)
+        draw.line((886, y + 15, 1037, y + 15), fill=(50, 78, 101, 255), width=1)
 
     # Compact data path at the base of the terminal.
     draw.line((730, 248, 833, 248), fill=(60, 112, 123, 255), width=2)
@@ -154,8 +158,42 @@ def make_frame(base: Image.Image, frame_number: int) -> Image.Image:
     # Status pulse and moving accent shimmer.
     pulse = 0.65 + 0.35 * (0.5 + 0.5 * math.sin(elapsed * math.tau / 2.0))
     glow_dot(image, (132, 65), (85, 230, 165), 4, pulse)
-    shimmer_x = 66 + int((elapsed / SECONDS) * 529)
+    shimmer_x = 330 + round(264 * math.sin(elapsed * math.tau / SECONDS - math.pi / 2))
     draw.rounded_rectangle((max(66, shimmer_x - 48), 190, min(595, shimmer_x + 48), 194), radius=2, fill=(102, 167, 255, 210))
+
+    # Fourth animation: a true character-by-character typewriter loop.
+    messages = [
+        ("Building hard agent benchmarks.", (85, 230, 204)),
+        ("Engineering exact verifiers.", (101, 167, 255)),
+        ("Reproducing failures in containers.", (85, 230, 165)),
+        ("Turning model failures into evidence.", (190, 157, 255)),
+    ]
+    segment_duration = SECONDS / len(messages)
+    local_time = elapsed % segment_duration
+    message_index = min(len(messages) - 1, int(elapsed / segment_duration))
+    message, type_color = messages[message_index]
+    type_duration, hold_duration = 2.2, 1.0
+    if local_time < type_duration:
+        character_count = int(len(message) * local_time / type_duration)
+        active_motion = True
+    elif local_time < type_duration + hold_duration:
+        character_count = len(message)
+        active_motion = False
+    else:
+        delete_progress = (local_time - type_duration - hold_duration) / (segment_duration - type_duration - hold_duration)
+        character_count = max(0, round(len(message) * (1.0 - delete_progress)))
+        active_motion = True
+    if local_time >= segment_duration - 1 / FPS:
+        character_count = 0
+    text_alpha = 255
+    typed = message[:character_count]
+    draw.text((106, 249), typed, font=FONT_TYPEWRITER, fill=(218, 230, 241, text_alpha))
+    typed_box = draw.textbbox((106, 249), typed, font=FONT_TYPEWRITER)
+    show_cursor = active_motion or int(local_time * 4) % 2 == 0
+    if show_cursor:
+        cursor_x = max(108, typed_box[2] + 4)
+        glow_dot(image, (cursor_x + 2, 263), type_color, 2, 0.8)
+        draw.rounded_rectangle((cursor_x, 251, cursor_x + 4, 275), radius=1, fill=(*type_color, text_alpha))
 
     # Type validation outcomes one at a time.
     outcomes = [
@@ -164,31 +202,34 @@ def make_frame(base: Image.Image, frame_number: int) -> Image.Image:
         ("0.0", 2.25, (101, 167, 255)),
         ("0/5 solved", 3.05, (190, 157, 255)),
     ]
+    terminal_alpha = min(1.0, elapsed / 0.35)
+    if elapsed > SECONDS - 0.55:
+        terminal_alpha *= max(0.0, (SECONDS - elapsed) / 0.55)
     for index, (value, start, color) in enumerate(outcomes):
         shown = reveal(value, elapsed, start)
         y = 88 + index * 36
         if shown:
-            draw.text((1051, y), shown, font=FONT_MONO_BOLD, anchor="ra", fill=(*color, 255))
+            draw.text((1051, y), shown, font=FONT_MONO_BOLD, anchor="ra", fill=(*color, round(255 * terminal_alpha)))
             if len(shown) < len(value) and int(elapsed * 5) % 2 == 0:
                 end = draw.textbbox((1051, y), shown, font=FONT_MONO_BOLD, anchor="ra")
-                draw.rectangle((end[2] + 3, y + 2, end[2] + 9, y + 18), fill=(*color, 230))
+                draw.rectangle((end[2] + 3, y + 2, end[2] + 9, y + 18), fill=(*color, round(230 * terminal_alpha)))
         else:
-            draw.text((1051, y), "···", font=FONT_MONO_BOLD, anchor="ra", fill=(72, 94, 116, 170))
+            draw.text((1051, y), "···", font=FONT_MONO_BOLD, anchor="ra", fill=(72, 94, 116, round(170 * terminal_alpha)))
 
     # Packets travel through both replica lanes and then into the verifier.
-    lane_phase = (elapsed * 0.42) % 1.0
+    lane_phase = (elapsed * 0.375) % 1.0
     top = quadratic((730, 248), (790, 234), (853, 248), lane_phase)
     bottom = quadratic((730, 277), (792, 279), (853, 248), (lane_phase + 0.46) % 1.0)
     outbound = quadratic((873, 248), (932, 240), (994, 248), (lane_phase + 0.18) % 1.0)
-    glow_dot(image, top, (85, 230, 204), 3, 0.95)
-    glow_dot(image, bottom, (101, 167, 255), 3, 0.95)
-    glow_dot(image, outbound, (190, 157, 255), 3, 0.95)
+    glow_dot(image, top, (85, 230, 204), 3, 0.95 * terminal_alpha)
+    glow_dot(image, bottom, (101, 167, 255), 3, 0.95 * terminal_alpha)
+    glow_dot(image, outbound, (190, 157, 255), 3, 0.95 * terminal_alpha)
 
-    # Accurate final state stays visible for the last third of the loop.
+    # Keep the review state visible after the initial validation sequence.
     if elapsed >= 4.8:
-        fade = min(1.0, (elapsed - 4.8) / 0.45)
-        draw.rounded_rectangle((871, 277, 1118, 297), radius=10, fill=(29, 24, 54, round(220 * fade)), outline=(151, 123, 224, round(180 * fade)))
-        draw.text((994, 279), "TB5 CANDIDATE · REVIEW OPEN", font=FONT_MONO_SMALL, anchor="ma", fill=(203, 186, 255, round(255 * fade)))
+        fade = min(1.0, (elapsed - 4.8) / 0.45) * terminal_alpha
+        draw.rounded_rectangle((890, 272, 1118, 300), radius=14, fill=(29, 24, 54, round(220 * fade)), outline=(151, 123, 224, round(180 * fade)))
+        draw.text((1004, 286), "TB5 · REVIEW OPEN", font=FONT_STATUS, anchor="mm", fill=(218, 205, 255, round(255 * fade)))
 
     return image.convert("RGB")
 
@@ -203,7 +244,7 @@ def main() -> None:
         OUTPUT,
         save_all=True,
         append_images=frames[1:],
-        duration=round(1000 / FPS),
+        duration=[80 if index % 3 != 2 else 90 for index in range(FRAME_COUNT)],
         loop=0,
         optimize=True,
         disposal=1,

@@ -20,18 +20,18 @@ def load_font(name: str, size: int) -> ImageFont.FreeTypeFont:
     return ImageFont.load_default()
 
 
-TITLE = load_font("segoeuib.ttf", 32)
-SUBTITLE = load_font("segoeui.ttf", 18)
-MONO = load_font("consola.ttf", 15)
-MONO_BOLD = load_font("consolab.ttf", 15)
-MONO_SMALL = load_font("consola.ttf", 12)
+TITLE = load_font("segoeuib.ttf", 34)
+SUBTITLE = load_font("segoeui.ttf", 19)
+MONO_BOLD = load_font("consolab.ttf", 17)
+MONO_SMALL = load_font("consola.ttf", 14)
+STAGE = load_font("consolab.ttf", 16)
+CARD_CAPTION = load_font("consola.ttf", 16)
 
 TEAL = (85, 230, 204)
 BLUE = (101, 167, 255)
 VIOLET = (176, 140, 255)
 GREEN = (85, 230, 165)
 TEXT = (224, 234, 244)
-MUTED = (127, 154, 180)
 
 
 def mix(a: tuple[int, int, int], b: tuple[int, int, int], ratio: float) -> tuple[int, int, int]:
@@ -50,10 +50,10 @@ def base_image() -> Image.Image:
 
     image = image.convert("RGBA")
     draw = ImageDraw.Draw(image, "RGBA")
-    for x in range(0, WIDTH, 34):
-        draw.line((x, 0, x, HEIGHT), fill=(136, 172, 207, 15))
-    for y in range(0, HEIGHT, 34):
-        draw.line((0, y, WIDTH, y), fill=(136, 172, 207, 15))
+    for x in range(0, WIDTH, 50):
+        draw.line((x, 0, x, HEIGHT), fill=(20, 38, 55, 255))
+    for y in range(0, HEIGHT, 50):
+        draw.line((0, y, WIDTH, y), fill=(20, 38, 55, 255))
     draw.ellipse((880, -130, 1190, 180), fill=(18, 29, 67, 255))
     draw.ellipse((-120, 215, 180, 515), fill=(7, 35, 40, 255))
     draw.rounded_rectangle((1, 1, WIDTH - 2, HEIGHT - 2), radius=22, outline=(44, 70, 97, 230), width=2)
@@ -66,27 +66,27 @@ def base_image() -> Image.Image:
         angle = path_index / 96 * math.tau
         infinity_path.append((960 + 70 * math.cos(angle), 82 + 27 * math.sin(2 * angle)))
     draw.line(infinity_path, fill=(67, 81, 139, 210), width=2, joint="curve")
-    draw.text((960, 114), "GRADING CORE", font=MONO_SMALL, anchor="ma", fill=(103, 119, 169))
-    draw.rounded_rectangle((40, 119, 1060, 122), radius=2, fill=(50, 76, 101))
+    draw.text((960, 111), "GRADING CORE", font=MONO_SMALL, anchor="mm", fill=(155, 174, 211))
+    draw.rounded_rectangle((40, 125, 1060, 128), radius=2, fill=(50, 76, 101))
 
     # Pipeline rail and labels.
-    node_x = [78, 230, 382, 534, 686, 838, 990]
+    node_x = [100, 325, 550, 775, 1000]
     draw.line((node_x[0], 167, node_x[-1], 167), fill=(47, 77, 104), width=4)
-    labels = ["INGEST", "AUDIT", "CALIBRATE", "GRADE", "TRIALS", "REPORT", "EVIDENCE"]
+    labels = ["TASK", "AUDIT", "CALIBRATE", "GRADE", "EVIDENCE"]
     for x, label in zip(node_x, labels):
-        draw.ellipse((x - 21, 146, x + 21, 188), fill=(10, 30, 48), outline=(55, 84, 109), width=2)
-        box = draw.textbbox((0, 0), label, font=MONO_SMALL)
-        draw.text((x - (box[2] - box[0]) / 2, 196), label, font=MONO_SMALL, fill=MUTED)
+        draw.ellipse((x - 25, 142, x + 25, 192), fill=(10, 30, 48), outline=(65, 96, 123), width=3)
+        box = draw.textbbox((0, 0), label, font=STAGE)
+        draw.text((x - (box[2] - box[0]) / 2, 198), label, font=STAGE, fill=(158, 183, 205))
 
     cards = [
-        (40, 228, 350, "VERIFIER AUDIT", "rubric and implementation review", TEAL),
-        (395, 228, 705, "PASS@K TRIALS", "on-demand model panels", BLUE),
-        (750, 228, 1060, "CALIBRATION", "oracle · no-op · mutation", VIOLET),
+        (40, 228, 350, "VERIFIER AUDIT", "rubric + verifier review", TEAL),
+        (395, 228, 705, "PASS@K TRIALS", "repeatable model trials", BLUE),
+        (750, 228, 1060, "CALIBRATION", "oracle · no-op · mutations", VIOLET),
     ]
     for x1, y1, x2, heading, caption, color in cards:
         draw.rounded_rectangle((x1, y1, x2, 294), radius=13, fill=(9, 28, 45), outline=(45, 72, 96))
         draw.text((x1 + 17, y1 + 10), heading, font=MONO_BOLD, fill=color)
-        draw.text((x1 + 17, y1 + 30), caption, font=MONO_SMALL, fill=(115, 142, 166))
+        draw.text((x1 + 17, y1 + 32), caption, font=CARD_CAPTION, fill=(166, 190, 211))
     return image
 
 
@@ -107,23 +107,24 @@ def ease(value: float) -> float:
 def render_frame(base: Image.Image, index: int) -> Image.Image:
     elapsed = index / FPS
     image = base.copy()
-    draw = ImageDraw.Draw(image, "RGBA")
-    node_x = [78, 230, 382, 534, 686, 838, 990]
-    colors = [TEAL, TEAL, BLUE, TEAL, BLUE, VIOLET, GREEN]
+    motion = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(motion, "RGBA")
+    node_x = [100, 325, 550, 775, 1000]
+    colors = [TEAL, BLUE, VIOLET, BLUE, GREEN]
 
     # A soft scan across the title rule.
     scan = 40 + int((elapsed / SECONDS) * 1020)
-    draw.rounded_rectangle((max(40, scan - 70), 119, min(1060, scan + 70), 122), radius=2, fill=(*BLUE, 220))
+    draw.rounded_rectangle((max(40, scan - 70), 125, min(1060, scan + 70), 128), radius=2, fill=(*BLUE, 220))
 
     # Two particles orbit a continuous infinity path in opposite phases.
     for offset, color in ((0.0, TEAL), (math.pi, VIOLET)):
         angle = elapsed * math.tau / 4.0 + offset
         orbit_x = round(960 + 70 * math.cos(angle))
         orbit_y = round(82 + 27 * math.sin(2 * angle))
-        glow(image, orbit_x, orbit_y, color, 4)
+        glow(motion, orbit_x, orbit_y, color, 4)
 
-    # One gate completes every 0.62 seconds, with a packet moving to the next gate.
-    start, step = 0.45, 0.62
+    # One gate completes every 0.90 seconds, with a packet moving to the next gate.
+    start, step = 0.55, 0.90
     progress = max(0.0, (elapsed - start) / step)
     completed = min(len(node_x), int(progress))
     segment = min(len(node_x) - 2, max(0, int(progress)))
@@ -131,11 +132,11 @@ def render_frame(base: Image.Image, index: int) -> Image.Image:
 
     for node_index, (x, color) in enumerate(zip(node_x, colors)):
         if node_index < completed:
-            draw.ellipse((x - 21, 146, x + 21, 188), fill=(13, 43, 59), outline=(*color, 255), width=3)
-            draw.line((x - 8, 167, x - 1, 174, x + 11, 158), fill=(*color, 255), width=3, joint="curve")
+            draw.ellipse((x - 25, 142, x + 25, 192), fill=(13, 43, 59), outline=(*color, 255), width=3)
+            draw.line((x - 9, 167, x - 1, 175, x + 13, 157), fill=(*color, 255), width=4, joint="curve")
         elif node_index == completed and elapsed >= start:
             pulse = 1 + 0.15 * math.sin(elapsed * math.tau * 2)
-            radius = round(21 * pulse)
+            radius = round(25 * pulse)
             draw.ellipse((x - radius, 167 - radius, x + radius, 167 + radius), fill=(12, 36, 55), outline=(*color, 230), width=3)
 
     if elapsed >= start and completed < len(node_x):
@@ -143,7 +144,7 @@ def render_frame(base: Image.Image, index: int) -> Image.Image:
             packet_x = node_x[0]
         else:
             packet_x = round(node_x[segment] + (node_x[segment + 1] - node_x[segment]) * within)
-        glow(image, packet_x, 167, colors[min(segment + 1, len(colors) - 1)], 5)
+        glow(motion, packet_x, 167, colors[min(segment + 1, len(colors) - 1)], 5)
 
     # Three workflow cards pulse independently as the pipeline advances.
     card_ranges = [(40, 228, 350, TEAL, 1.2), (395, 228, 705, BLUE, 2.5), (750, 228, 1060, VIOLET, 3.8)]
@@ -166,16 +167,20 @@ def render_frame(base: Image.Image, index: int) -> Image.Image:
         lane_phase = ((elapsed - 3.8) * 0.48) % 1.0
         draw.line((930, 279, 1038, 279), fill=(45, 91, 100), width=2)
         draw.line((930, 288, 1038, 288), fill=(55, 80, 119), width=2)
-        glow(image, round(930 + lane_phase * 108), 279, TEAL, 3)
-        glow(image, round(1038 - lane_phase * 108), 288, BLUE, 3)
+        glow(motion, round(930 + lane_phase * 108), 279, TEAL, 3)
+        glow(motion, round(1038 - lane_phase * 108), 288, BLUE, 3)
 
     # Final state is held long enough to read.
     if completed >= len(node_x):
         fade = ease((elapsed - (start + step * len(node_x))) / 0.35)
-        draw.rounded_rectangle((811, 25, 1060, 58), radius=16, fill=(15, 50, 49, round(235 * fade)), outline=(*GREEN, round(210 * fade)))
-        draw.text((935, 34), "PIPELINE TRACE COMPLETE", font=MONO_BOLD, anchor="ma", fill=(*GREEN, round(255 * fade)))
-        draw.text((935, 67), "private R&D platform", font=MONO_SMALL, anchor="ma", fill=(138, 169, 194, round(255 * fade)))
+        draw.rounded_rectangle((620, 22, 880, 56), radius=17, fill=(15, 50, 49, round(235 * fade)), outline=(*GREEN, round(210 * fade)))
+        draw.text((750, 39), "PIPELINE TRACE COMPLETE", font=MONO_BOLD, anchor="mm", fill=(*GREEN, round(255 * fade)))
 
+    loop_alpha = min(ease(elapsed / 0.40), ease((SECONDS - elapsed) / 0.75))
+    if loop_alpha < 1.0:
+        alpha = motion.getchannel("A").point(lambda value: round(value * loop_alpha))
+        motion.putalpha(alpha)
+    image.alpha_composite(motion)
     return image.convert("RGB")
 
 
@@ -189,10 +194,10 @@ def main() -> None:
         OUTPUT,
         save_all=True,
         append_images=frames[1:],
-        duration=round(1000 / FPS),
+        duration=[120 if index % 2 == 0 else 130 for index in range(FRAME_COUNT)],
         loop=0,
         optimize=True,
-        disposal=1,
+        disposal=2,
     )
     print(f"wrote {OUTPUT} ({OUTPUT.stat().st_size / 1024:.1f} KiB, {FRAME_COUNT} frames)")
 
