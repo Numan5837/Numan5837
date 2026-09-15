@@ -60,6 +60,18 @@ Each contribution is kept small enough to review independently and is clearly la
 
 I am working on hard, realistic terminal-agent tasks and the infrastructure needed to evaluate them reliably. I am interested in AI evaluation, distributed systems, developer infrastructure, and cloud reliability.
 
+## Contribution activity
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake.svg" />
+    <img src="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake-dark.svg" width="100%" alt="Animated snake moving through Numan's GitHub contribution graph" />
+  </picture>
+</p>
+
+<p align="center"><sub>Generated daily from my public GitHub contribution graph.</sub></p>
+
 <p align="center">
   <a href="https://www.linkedin.com/in/numan-s-b622bb250/">LinkedIn</a>
   ·
