@@ -32,7 +32,7 @@ All five trials completed without infrastructure errors. In the first two trajec
 I built the enterprise grading layer inside **Infinity Megatron**, a private AI-agent evaluation platform. It combines rubric-based artifact scoring, verifier audits, Docker calibration, Pass@k model trials, mutation testing, and structured evaluation reports.
 
 <p align="center">
-  <img src="assets/enterprise-grading.gif" width="100%" alt="Animated Infinity Megatron enterprise grading pipeline moving through ingest, static analysis, build, oracle, no-op, trials, and reporting gates" />
+  <img src="assets/enterprise-grading.gif" width="100%" alt="Animated Infinity Megatron enterprise grading pipeline moving through ingest, audit, calibration, grading, trials, reporting, and evidence gates" />
 </p>
 
 The implementation is kept in a private repository, so this profile describes the system without publishing its code or internal configuration.
