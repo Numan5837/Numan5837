@@ -7,8 +7,8 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "assets" / "infinity-grading.gif"
-WIDTH, HEIGHT = 1200, 300
+OUTPUT = ROOT / "assets" / "infinity-grading-flow.gif"
+WIDTH, HEIGHT = 1200, 400
 FPS, SECONDS = 12, 10
 FRAME_COUNT = FPS * SECONDS
 
@@ -23,24 +23,27 @@ def load_font(name: str, size: int) -> ImageFont.FreeTypeFont:
     return ImageFont.load_default()
 
 
-TITLE = load_font("segoeuib.ttf", 40)
-SUBTITLE = load_font("segoeui.ttf", 20)
-MONO_BOLD = load_font("consolab.ttf", 20)
+TITLE = load_font("segoeuib.ttf", 46)
+SUBTITLE = load_font("segoeui.ttf", 21)
+MONO_BOLD = load_font("consolab.ttf", 19)
 MONO = load_font("consola.ttf", 19)
-MONO_SMALL_BOLD = load_font("consolab.ttf", 18)
+MONO_SMALL_BOLD = load_font("consolab.ttf", 16)
+STAGE_LABEL = load_font("consolab.ttf", 18)
 
-BACKGROUND_LEFT = (5, 16, 27)
-BACKGROUND_RIGHT = (10, 32, 49)
-BORDER = (40, 70, 93)
-TEAL = (105, 230, 207)
-BLUE = (120, 167, 255)
+BACKGROUND_LEFT = (4, 14, 25)
+BACKGROUND_RIGHT = (7, 31, 47)
+BORDER = (42, 86, 108)
+TEAL = (103, 229, 207)
+BLUE = (126, 183, 255)
 GREEN = (93, 224, 170)
-TEXT = (244, 247, 251)
-MUTED = (167, 182, 199)
+TEXT = (242, 248, 250)
+MUTED = (166, 187, 202)
 RAIL = BORDER
 
-NODE_X = [105, 352, 600, 848, 1095]
-NODE_Y = 182
+CONTENT_LEFT = 72
+CONTENT_RIGHT = WIDTH - CONTENT_LEFT
+NODE_X = [130, 365, 600, 835, 1070]
+NODE_Y = 239
 NODE_RADIUS = 22
 STAGES = ["TASK", "AUDIT", "CALIBRATE", "GRADE", "EVIDENCE"]
 CAPTIONS = [
@@ -75,19 +78,33 @@ def make_background() -> Image.Image:
         horizontal = x / (WIDTH - 1)
         color = mix(BACKGROUND_LEFT, BACKGROUND_RIGHT, horizontal)
         for y in range(HEIGHT):
-            vertical = 1.0 - 0.055 * (y / HEIGHT)
+            vertical = 1.0 - 0.085 * (y / HEIGHT)
             pixels[x, y] = tuple(round(channel * vertical) for channel in color)
 
-    draw = ImageDraw.Draw(image, "RGBA")
-    draw.ellipse((870, -210, 1330, 250), fill=(66, 126, 190, 13))
-    draw.ellipse((-190, 210, 300, 700), fill=(63, 205, 180, 8))
+    # Broad, blurred color fields add depth while keeping the reading plane quiet.
+    glow = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    glow_draw = ImageDraw.Draw(glow, "RGBA")
+    glow_draw.ellipse((650, -260, 1370, 470), fill=(40, 110, 150, 34))
+    glow_draw.ellipse((-340, 120, 420, 860), fill=(42, 168, 151, 17))
+    glow = glow.filter(ImageFilter.GaussianBlur(88))
+    image = Image.alpha_composite(image.convert("RGBA"), glow)
+
+    texture = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(texture, "RGBA")
+    # The very faint grid ties this panel to the profile hero without competing
+    # with the five-stage workflow.
+    for x in range(24, WIDTH, 72):
+        draw.line((x, 2, x, HEIGHT - 3), fill=(76, 154, 172, 10), width=1)
+    for y in range(38, HEIGHT, 56):
+        draw.line((2, y, WIDTH - 3, y), fill=(76, 154, 172, 8), width=1)
     draw.rounded_rectangle(
         (1, 1, WIDTH - 2, HEIGHT - 2),
-        radius=22,
+        radius=24,
         outline=(*BORDER, 230),
         width=2,
     )
-    return image.convert("RGBA")
+    image.alpha_composite(texture)
+    return image
 
 
 def draw_infinity_mark(draw: ImageDraw.ImageDraw) -> None:
@@ -96,8 +113,8 @@ def draw_infinity_mark(draw: ImageDraw.ImageDraw) -> None:
         angle = point_index / 96 * math.tau
         points.append(
             (
-                1045 + 60 * math.cos(angle),
-                70 + 23 * math.sin(2 * angle),
+                1062 + 57 * math.cos(angle),
+                83 + 22 * math.sin(2 * angle),
             )
         )
     draw.line(points, fill=(102, 132, 166, 175), width=2, joint="curve")
@@ -118,29 +135,42 @@ def draw_centered_text(
 
 def draw_static() -> Image.Image:
     image = make_background()
-    draw = ImageDraw.Draw(image, "RGBA")
+    static_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(static_layer, "RGBA")
 
     draw.text(
-        (66, 29),
+        (CONTENT_LEFT, 38),
         "INFINITY MEGATRON · PRIVATE R&D",
         font=MONO_SMALL_BOLD,
         fill=(*TEAL, 255),
     )
     draw.text(
-        (66, 53),
+        (CONTENT_LEFT, 67),
         "Enterprise grading",
         font=TITLE,
         fill=(244, 248, 253, 255),
     )
     draw.text(
-        (66, 103),
+        (CONTENT_LEFT, 126),
         "Auditable evaluation from task intake to evidence",
         font=SUBTITLE,
         fill=(190, 207, 222, 255),
     )
     draw_infinity_mark(draw)
 
-    draw.rounded_rectangle((66, 135, 1134, 138), radius=2, fill=RAIL)
+    draw.line(
+        (CONTENT_LEFT, 169, CONTENT_RIGHT, 169),
+        fill=(*BORDER, 145),
+        width=2,
+    )
+
+    draw.rounded_rectangle(
+        (CONTENT_LEFT, 194, CONTENT_RIGHT, 305),
+        radius=18,
+        fill=(4, 19, 32, 155),
+        outline=(52, 95, 119, 150),
+        width=2,
+    )
     draw.line((NODE_X[0], NODE_Y, NODE_X[-1], NODE_Y), fill=RAIL, width=4)
 
     for center_x, label in zip(NODE_X, STAGES):
@@ -155,23 +185,15 @@ def draw_static() -> Image.Image:
             outline=(61, 89, 114, 255),
             width=3,
         )
-        draw_centered_text(
-            draw,
-            center_x,
-            210,
-            label,
-            MONO_BOLD,
-            (*MUTED, 255),
-        )
-
     draw.rounded_rectangle(
-        (66, 240, 1134, 286),
-        radius=12,
-        fill=(7, 21, 35, 245),
-        outline=(48, 75, 103, 255),
+        (CONTENT_LEFT, 325, CONTENT_RIGHT, 380),
+        radius=14,
+        fill=(4, 18, 30, 228),
+        outline=(52, 95, 119, 220),
         width=2,
     )
-    draw.line((286, 249, 286, 277), fill=(48, 75, 103, 255), width=2)
+    draw.line((310, 337, 310, 368), fill=(52, 95, 119, 210), width=2)
+    image.alpha_composite(static_layer)
     return image
 
 
@@ -236,10 +258,10 @@ def draw_detail_strip(
     opacity: float,
 ) -> None:
     alpha = round(255 * opacity)
-    draw.text((86, 251), heading, font=MONO_BOLD, fill=(*color, alpha))
-    draw.text((310, 252), caption, font=MONO, fill=(*TEXT, alpha))
+    draw.text((98, 341), heading, font=MONO_BOLD, fill=(*color, alpha))
+    draw.text((336, 341), caption, font=MONO, fill=(*TEXT, alpha))
     draw.text(
-        (1114, 251),
+        (1104, 343),
         step,
         font=MONO_SMALL_BOLD,
         anchor="ra",
@@ -311,6 +333,23 @@ def render_frame(base: Image.Image, frame_index: int) -> Image.Image:
                 width=3,
             )
 
+        label_color = MUTED
+        label_opacity = 210
+        if elapsed >= completed_at:
+            label_color = GREEN
+            label_opacity = 245
+        elif index == stage_index:
+            label_color = TEAL
+            label_opacity = 255
+        draw_centered_text(
+            draw,
+            center_x,
+            272,
+            STAGES[index],
+            STAGE_LABEL,
+            (*label_color, round(label_opacity * loop_opacity)),
+        )
+
     if elapsed < COMPLETE_AT:
         glow_dot(
             motion,
@@ -333,8 +372,8 @@ def render_frame(base: Image.Image, frame_index: int) -> Image.Image:
     else:
         ready_opacity = ease((elapsed - COMPLETE_AT) / 0.16) * loop_opacity
         draw.rounded_rectangle(
-            (66, 240, 1134, 286),
-            radius=12,
+            (CONTENT_LEFT, 325, CONTENT_RIGHT, 380),
+            radius=14,
             outline=(*GREEN, round(210 * ready_opacity)),
             width=2,
         )
@@ -355,7 +394,7 @@ def main() -> None:
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     base = draw_static()
     raw_frames = [render_frame(base, index) for index in range(FRAME_COUNT)]
-    palette = raw_frames[-8].quantize(colors=64, method=Image.Quantize.MEDIANCUT)
+    palette = raw_frames[-8].quantize(colors=96, method=Image.Quantize.MEDIANCUT)
     frames = [
         frame.quantize(palette=palette, dither=Image.Dither.NONE)
         for frame in raw_frames
