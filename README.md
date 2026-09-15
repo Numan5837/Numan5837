@@ -22,8 +22,6 @@
 
 <sub>BENCHMARK DESIGN &nbsp;·&nbsp; EVALUATION SYSTEMS &nbsp;·&nbsp; RELIABLE INFRASTRUCTURE</sub>
 
-<br/>
-
 ### Replica reconciliation
 
 **Terminal-Bench** &nbsp;·&nbsp; <sub>OPEN TB5 CANDIDATE</sub>
