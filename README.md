@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/header.gif" width="96%" alt="Numan S. — agent evaluation, verifier engineering, and reproducible infrastructure" />
+  <img src="assets/profile-header.gif" width="96%" alt="Numan S. — agent evaluation, verifier engineering, and reproducible infrastructure" />
 </p>
 
 <p align="center"><strong>AI evaluation · verifier engineering · reproducible infrastructure</strong></p>
@@ -34,7 +34,7 @@ All five trials completed without infrastructure errors. In the two trajectories
 I built the enterprise grading layer for **Infinity Megatron**, a private AI-agent evaluation platform. The pipeline covers rubric-based artifact scoring, verifier audits, Docker calibration, Pass@k trials, mutation testing, and structured reports.
 
 <p align="center">
-  <img src="assets/enterprise-grading.gif" width="96%" alt="Infinity Megatron grading pipeline from task intake through evidence" />
+  <img src="assets/infinity-grading.gif" width="96%" alt="Infinity Megatron grading pipeline from task intake through evidence" />
 </p>
 
 <p align="center"><sub>Private implementation; the animation shows the workflow at a high level.</sub></p>

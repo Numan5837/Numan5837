@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "assets" / "enterprise-grading.gif"
+OUTPUT = ROOT / "assets" / "infinity-grading.gif"
 WIDTH, HEIGHT = 1200, 300
 FPS, SECONDS = 12, 10
 FRAME_COUNT = FPS * SECONDS

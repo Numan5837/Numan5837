@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "assets" / "header.gif"
+OUTPUT = ROOT / "assets" / "profile-header.gif"
 WIDTH, HEIGHT = 1200, 320
 FPS = 16
 SECONDS = 16
