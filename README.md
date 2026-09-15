@@ -27,6 +27,16 @@ All five trials completed without infrastructure errors. In the first two trajec
 
 [Review the open TB5 candidate](https://github.com/harbor-framework/terminal-bench/pull/1969) · [Official validation run](https://github.com/harbor-framework/terminal-bench/actions/runs/34815816471) · [Model-failure analysis](https://github.com/harbor-framework/terminal-bench/pull/1969#issuecomment-5661777651)
 
+### Infinity Megatron
+
+I built the enterprise grading layer inside **Infinity Megatron**, a private AI-agent evaluation platform. It combines rubric-based artifact scoring, verifier audits, Docker calibration, Pass@k model trials, mutation testing, and structured evaluation reports.
+
+<p align="center">
+  <img src="assets/enterprise-grading.gif" width="100%" alt="Animated Infinity Megatron enterprise grading pipeline moving through ingest, static analysis, build, oracle, no-op, trials, and reporting gates" />
+</p>
+
+The implementation is kept in a private repository, so this profile describes the system without publishing its code or internal configuration.
+
 ### Evaluator reliability
 
 I submitted a focused series of patches to [Gandalf the Grader](https://github.com/Handshake-AI-Research/gandalf-the-grader/pulls?q=is%3Apr+author%3ANuman5837), an evaluation tool for agent trajectories:
