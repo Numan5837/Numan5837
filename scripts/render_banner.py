@@ -7,21 +7,19 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "assets" / "profile-header.gif"
+OUTPUT = ROOT / "assets" / "profile-hero.gif"
 WIDTH, HEIGHT = 1200, 320
 FPS = 16
 SECONDS = 16
 FRAME_COUNT = FPS * SECONDS
 
-BACKGROUND_LEFT = (5, 16, 27)
-BACKGROUND_RIGHT = (10, 32, 49)
-CARD = (7, 25, 39)
-BORDER = (40, 70, 93)
+BACKGROUND_LEFT = (5, 15, 26)
+BACKGROUND_RIGHT = (9, 32, 48)
+BORDER = (38, 72, 94)
 TEAL = (105, 230, 207)
-BLUE = (120, 167, 255)
-TEXT = (244, 247, 251)
-MUTED = (167, 182, 199)
-SUCCESS = (93, 224, 170)
+BLUE = (128, 181, 255)
+TEXT = (242, 247, 250)
+MUTED = (164, 182, 198)
 
 MESSAGES = [
     "I build hard agent benchmarks.",
@@ -49,15 +47,10 @@ def font(name: str, size: int) -> ImageFont.FreeTypeFont:
     return ImageFont.load_default()
 
 
-FONT_NAME = font("segoeuib.ttf", 64)
-FONT_EYEBROW = font("seguisb.ttf", 20)
-FONT_SUBTITLE = font("segoeui.ttf", 24)
+FONT_NAME = font("segoeuib.ttf", 65)
+FONT_LABEL = font("consolab.ttf", 17)
+FONT_SUBTITLE = font("segoeui.ttf", 23)
 FONT_TYPEWRITER = font("consolab.ttf", 26)
-FONT_CARD_LABEL = font("consolab.ttf", 19)
-FONT_CARD_TITLE = font("seguisb.ttf", 26)
-FONT_METRIC = font("consola.ttf", 19)
-FONT_METRIC_BOLD = font("consolab.ttf", 21)
-FONT_STATUS = font("consolab.ttf", 18)
 
 
 def mix(
@@ -75,96 +68,76 @@ def make_background() -> Image.Image:
         horizontal = x / (WIDTH - 1)
         base = mix(BACKGROUND_LEFT, BACKGROUND_RIGHT, horizontal)
         for y in range(HEIGHT):
-            vertical = 1.0 - 0.055 * (y / HEIGHT)
+            vertical = 1.0 - 0.05 * (y / HEIGHT)
             pixels[x, y] = tuple(round(channel * vertical) for channel in base)
-
-    draw = ImageDraw.Draw(image, "RGBA")
-    draw.ellipse((870, -210, 1330, 250), fill=(66, 126, 190, 13))
-    draw.ellipse((-190, 230, 300, 720), fill=(63, 205, 180, 8))
-    draw.rounded_rectangle(
-        (1, 1, WIDTH - 2, HEIGHT - 2),
-        radius=22,
-        outline=(*BORDER, 230),
-        width=2,
-    )
-    return image
+    return image.convert("RGBA")
 
 
 def draw_static() -> Image.Image:
-    image = make_background().convert("RGBA")
+    image = make_background()
     draw = ImageDraw.Draw(image, "RGBA")
 
-    # Compact terminal mark and quiet eyebrow.
-    draw.rounded_rectangle(
-        (64, 42, 108, 86),
-        radius=12,
-        fill=(9, 30, 45, 255),
-        outline=(*TEAL, 235),
-        width=2,
-    )
-    draw.line((77, 57, 85, 64, 77, 72), fill=(*TEAL, 255), width=3, joint="curve")
-    draw.line((89, 73, 98, 73), fill=(*TEAL, 255), width=3)
-    draw.text((124, 52), "AI EVALUATION · SYSTEMS", font=FONT_EYEBROW, fill=(*MUTED, 255))
-
-    draw.text((64, 91), "Numan S.", font=FONT_NAME, fill=(*TEXT, 255))
+    # A quiet identity stack mirrors the simple hierarchy of the reference header.
     draw.text(
-        (64, 176),
-        "Agent benchmarks · Exact verifiers · Cloud reliability",
+        (WIDTH // 2, 39),
+        "NUMAN5837  /  README.md",
+        font=FONT_LABEL,
+        anchor="ma",
+        fill=(*TEAL, 235),
+    )
+    draw.line((430, 48, 500, 48), fill=(*BORDER, 180), width=1)
+    draw.line((700, 48, 770, 48), fill=(*BORDER, 180), width=1)
+
+    draw.text(
+        (WIDTH // 2, 71),
+        "Numan S.",
+        font=FONT_NAME,
+        anchor="ma",
+        fill=(*TEXT, 255),
+    )
+    draw.text(
+        (WIDTH // 2, 151),
+        "AI evaluation · verifier engineering · reproducible infrastructure",
         font=FONT_SUBTITLE,
+        anchor="ma",
         fill=(*MUTED, 255),
     )
 
-    # The typewriter has enough internal padding to remain readable after GitHub scales it down.
     draw.rounded_rectangle(
-        (64, 219, 724, 281),
-        radius=12,
-        fill=(5, 20, 32, 247),
-        outline=(42, 82, 105, 255),
+        (1, 1, WIDTH - 2, HEIGHT - 2),
+        radius=22,
+        outline=(*BORDER, 220),
         width=2,
     )
-    draw.text((84, 232), ">", font=FONT_TYPEWRITER, fill=(*TEAL, 255))
-
-    # Static evidence card: the data stays legible while the typewriter moves.
-    draw.rounded_rectangle(
-        (764, 40, 1136, 280),
-        radius=20,
-        fill=(*CARD, 247),
-        outline=(38, 71, 94, 255),
-        width=2,
-    )
-    draw.text((808, 61), "CURRENT WORK", font=FONT_CARD_LABEL, fill=(*MUTED, 255))
-    draw.text((790, 91), "Replica reconciliation", font=FONT_CARD_TITLE, fill=(*TEXT, 255))
-    draw.line((790, 132, 1110, 132), fill=(39, 69, 90, 255), width=2)
-
-    metrics = [
-        (148, "Docker validation", "PASS", SUCCESS),
-        (181, "Reference oracle", "1.0", TEAL),
-        (214, "GPT-5.6 Sol", "0 / 5", BLUE),
-    ]
-    for y, label, value, color in metrics:
-        draw.text((790, y), label, font=FONT_METRIC, fill=(*MUTED, 255))
-        draw.text((1110, y), value, font=FONT_METRIC_BOLD, anchor="ra", fill=(*color, 255))
-
-    draw.rounded_rectangle(
-        (790, 242, 1110, 270),
-        radius=14,
-        fill=(10, 38, 50, 255),
-        outline=(50, 111, 113, 255),
-        width=1,
-    )
-    draw.text(
-        (950, 256),
-        "TB5 · OPEN FOR REVIEW",
-        font=FONT_STATUS,
-        anchor="mm",
-        fill=(*TEAL, 255),
-    )
-
     return image
 
 
-def typewriter_state(elapsed: float) -> tuple[str, str, float]:
-    """Return visible text, phase, and time within that phase."""
+def draw_wave(image: Image.Image, elapsed: float) -> None:
+    """Draw two slow background waves with enough contrast to survive GIF quantization."""
+    overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay, "RGBA")
+
+    phase = elapsed * math.tau / 16.0
+    first = []
+    second = []
+    for x in range(-20, WIDTH + 21, 12):
+        first_y = 257 + 10 * math.sin((x / 255.0) + phase)
+        second_y = 281 + 8 * math.sin((x / 295.0) + phase + 1.6)
+        first.append((x, round(first_y)))
+        second.append((x, round(second_y)))
+
+    first.extend(((WIDTH + 20, HEIGHT + 20), (-20, HEIGHT + 20)))
+    second.extend(((WIDTH + 20, HEIGHT + 20), (-20, HEIGHT + 20)))
+    draw.polygon(first, fill=(36, 117, 130, 20))
+    draw.polygon(second, fill=(65, 119, 178, 16))
+
+    glow_alpha = round(8 + 4 * (0.5 + 0.5 * math.sin(phase)))
+    draw.ellipse((780, -250, 1360, 285), fill=(68, 142, 193, glow_alpha))
+    image.alpha_composite(overlay)
+
+
+def typewriter_state(elapsed: float) -> tuple[str, str, float, str]:
+    """Return visible text, phase, phase time, and its complete message."""
     cursor = elapsed % SECONDS
     for message in MESSAGES:
         type_duration = len(message) / TYPE_RATE
@@ -172,37 +145,39 @@ def typewriter_state(elapsed: float) -> tuple[str, str, float]:
 
         if cursor < type_duration:
             count = min(len(message), int(cursor * TYPE_RATE))
-            return message[:count], "typing", cursor
+            return message[:count], "typing", cursor, message
         cursor -= type_duration
 
         if cursor < HOLD_DURATION:
-            return message, "holding", cursor
+            return message, "holding", cursor, message
         cursor -= HOLD_DURATION
 
         if cursor < erase_duration:
             count = max(0, len(message) - int(cursor * ERASE_RATE))
-            return message[:count], "erasing", cursor
+            return message[:count], "erasing", cursor, message
         cursor -= erase_duration
 
         if cursor < GAP_DURATION:
-            return "", "gap", cursor
+            return "", "gap", cursor, message
         cursor -= GAP_DURATION
 
-    return "", "gap", 0.0
+    return "", "gap", 0.0, MESSAGES[0]
 
 
 def make_frame(base: Image.Image, frame_number: int) -> Image.Image:
     elapsed = frame_number / FPS
     image = base.copy()
+    draw_wave(image, elapsed)
     draw = ImageDraw.Draw(image, "RGBA")
 
-    # One quiet status pulse is the only secondary motion in the header.
-    pulse = 0.50 + 0.28 * (0.5 + 0.5 * math.sin(elapsed * math.tau / 3.0))
-    dot_color = mix((31, 92, 82), TEAL, pulse)
-    draw.ellipse((784, 66, 794, 76), fill=(*dot_color, 255))
+    typed, phase, phase_time, complete_message = typewriter_state(elapsed)
+    full_box = draw.textbbox((0, 0), complete_message, font=FONT_TYPEWRITER)
+    full_width = full_box[2] - full_box[0]
+    text_x = round((WIDTH - full_width) / 2)
+    text_y = 215
 
-    typed, phase, phase_time = typewriter_state(elapsed)
-    text_x, text_y = 116, 232
+    prompt_x = text_x - 30
+    draw.text((prompt_x, text_y), ">", font=FONT_TYPEWRITER, fill=(*BLUE, 240))
     draw.text((text_x, text_y), typed, font=FONT_TYPEWRITER, fill=(*TEXT, 255))
 
     if phase != "gap":
@@ -210,7 +185,11 @@ def make_frame(base: Image.Image, frame_number: int) -> Image.Image:
         cursor_x = max(text_x, typed_box[2] + 4)
         show_cursor = phase != "holding" or int(phase_time / 0.5) % 2 == 0
         if show_cursor:
-            draw.rectangle((cursor_x, 235, cursor_x + 3, 261), fill=(*TEAL, 255))
+            draw.rounded_rectangle(
+                (cursor_x, 219, cursor_x + 3, 245),
+                radius=1,
+                fill=(*TEAL, 255),
+            )
 
     return image.convert("RGB")
 
@@ -219,7 +198,7 @@ def main() -> None:
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     base = draw_static()
     raw_frames = [make_frame(base, index) for index in range(FRAME_COUNT)]
-    palette = base.convert("RGB").quantize(colors=56, method=Image.Quantize.MEDIANCUT)
+    palette = base.convert("RGB").quantize(colors=64, method=Image.Quantize.MEDIANCUT)
     frames = [frame.quantize(palette=palette, dither=Image.Dither.NONE) for frame in raw_frames]
     durations = [70 if index % 4 == 3 else 60 for index in range(FRAME_COUNT)]
     frames[0].save(

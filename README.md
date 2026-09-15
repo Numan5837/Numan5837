@@ -1,16 +1,22 @@
-<p align="center">
-  <img src="assets/profile-header.gif" width="96%" alt="Numan S. — agent evaluation, verifier engineering, and reproducible infrastructure" />
-</p>
+<div align="center">
+  <img src="assets/profile-hero.gif" width="100%" alt="Numan S. — AI evaluation, verifier engineering, and reproducible infrastructure" />
 
-<p align="center"><strong>AI evaluation · verifier engineering · reproducible infrastructure</strong></p>
+  <br/><br/>
 
-I build containerized benchmarks that make agent failures measurable, reproducible, and useful for improving evaluation systems.
+  <a href="https://github.com/Numan5837">
+    <img src="https://avatars.githubusercontent.com/u/153755800?v=4" width="118" alt="Numan S." />
+  </a>
 
-<p align="center">
-  <a href="https://www.linkedin.com/in/numan-s-b622bb250/">LinkedIn</a> ·
-  <a href="https://github.com/harbor-framework/terminal-bench/pull/1969">Terminal-Bench PR</a> ·
-  <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests">Open-source work</a>
-</p>
+  <br/><br/>
+
+  <strong>AI evaluation &nbsp;·&nbsp; Verifier engineering &nbsp;·&nbsp; Reproducible infrastructure</strong>
+
+  <p>I build containerized benchmarks that make agent failures measurable, reproducible, and useful for improving evaluation systems.</p>
+
+  <a href="https://www.linkedin.com/in/numan-s-b622bb250/"><img src="https://img.shields.io/badge/LinkedIn-071827?style=for-the-badge&logo=linkedin&logoColor=69e6cf" alt="LinkedIn" /></a>
+  <a href="https://github.com/harbor-framework/terminal-bench/pull/1969"><img src="https://img.shields.io/badge/Terminal--Bench_%231969-071827?style=for-the-badge&logo=gnometerminal&logoColor=69e6cf" alt="Terminal-Bench pull request 1969" /></a>
+  <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests"><img src="https://img.shields.io/badge/Open--source_PRs-071827?style=for-the-badge&logo=github&logoColor=69e6cf" alt="Open-source pull requests" /></a>
+</div>
 
 ## Selected work
 
