@@ -1,16 +1,20 @@
-<div align="center">
-  <img src="assets/profile-typewriter-hero.gif" width="100%" alt="Numan S. — AI evaluation, verifier engineering, and reproducible infrastructure" />
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/main/assets/profile-typewriter-dark.gif" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/main/assets/profile-typewriter-light.gif" />
+    <img src="assets/profile-typewriter-dark.gif" width="100%" alt="Numan S. — AI evaluation, verifier engineering, and reproducible infrastructure" />
+  </picture>
+</p>
 
-  <br/>
+<p align="center">
+  I build containerized benchmarks that make agent failures measurable,<br/>reproducible, and useful for improving evaluation systems.
+</p>
 
-  <p>I build containerized benchmarks that make agent failures measurable,<br/>reproducible, and useful for improving evaluation systems.</p>
-
-  <p>
-    <a href="https://www.linkedin.com/in/numan-s-b622bb250/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" height="28" alt="LinkedIn" /></a>&nbsp;
-    <a href="https://github.com/harbor-framework/terminal-bench/pull/1969"><img src="https://img.shields.io/badge/Terminal--Bench_%231969-0B6477?style=for-the-badge&logo=gnometerminal&logoColor=white" height="28" alt="Terminal-Bench pull request 1969" /></a>&nbsp;
-    <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests"><img src="https://img.shields.io/badge/Open--source_PRs-24292F?style=for-the-badge&logo=github&logoColor=white" height="28" alt="Open-source pull requests" /></a>
-  </p>
-</div>
+<p align="center">
+  <a href="https://www.linkedin.com/in/numan-s-b622bb250/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" height="28" alt="LinkedIn" /></a>&nbsp;
+  <a href="https://github.com/harbor-framework/terminal-bench/pull/1969"><img src="https://img.shields.io/badge/Terminal--Bench_%231969-0B6477?style=for-the-badge&logo=gnometerminal&logoColor=white" height="28" alt="Terminal-Bench pull request 1969" /></a>&nbsp;
+  <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests"><img src="https://img.shields.io/badge/Open--source_PRs-24292F?style=for-the-badge&logo=github&logoColor=white" height="28" alt="Open-source pull requests" /></a>
+</p>
 
 ## 01 / From challenge to evidence
 
@@ -47,7 +51,11 @@ All five trials completed without infrastructure errors. In the two trajectories
 I built the enterprise grading layer for **Infinity Megatron**, a private AI-agent evaluation platform. The pipeline covers rubric-based artifact scoring, verifier audits, Docker calibration, Pass@k trials, mutation testing, and structured reports.
 
 <p align="center">
-  <img src="assets/infinity-grading-flow.gif" width="100%" alt="Infinity Megatron grading pipeline from task intake through evidence" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/main/assets/infinity-grading-flow-dark.gif" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/main/assets/infinity-grading-flow-light.gif" />
+    <img src="assets/infinity-grading-flow-dark.gif" width="100%" alt="Infinity Megatron grading pipeline from task intake through evidence" />
+  </picture>
 </p>
 
 <p align="center"><sub>Private implementation &nbsp;·&nbsp; The animation presents the workflow at a high level.</sub></p>

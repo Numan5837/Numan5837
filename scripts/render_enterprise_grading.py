@@ -1,14 +1,15 @@
 from __future__ import annotations
 
 import math
+from dataclasses import dataclass
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "assets" / "infinity-grading-flow.gif"
-WIDTH, HEIGHT = 1200, 400
+ASSET_DIR = ROOT / "assets"
+WIDTH, HEIGHT = 1200, 360
 FPS, SECONDS = 12, 10
 FRAME_COUNT = FPS * SECONDS
 
@@ -23,28 +24,60 @@ def load_font(name: str, size: int) -> ImageFont.FreeTypeFont:
     return ImageFont.load_default()
 
 
-TITLE = load_font("segoeuib.ttf", 46)
-SUBTITLE = load_font("segoeui.ttf", 21)
-MONO_BOLD = load_font("consolab.ttf", 19)
-MONO = load_font("consola.ttf", 19)
-MONO_SMALL_BOLD = load_font("consolab.ttf", 16)
-STAGE_LABEL = load_font("consolab.ttf", 18)
+TITLE = load_font("segoeuib.ttf", 43)
+SUBTITLE = load_font("segoeui.ttf", 20)
+MONO_BOLD = load_font("consolab.ttf", 17)
+MONO = load_font("consola.ttf", 18)
+MONO_SMALL_BOLD = load_font("consolab.ttf", 14)
+STAGE_LABEL = load_font("consolab.ttf", 17)
 
-BACKGROUND_LEFT = (4, 14, 25)
-BACKGROUND_RIGHT = (7, 31, 47)
-BORDER = (42, 86, 108)
-TEAL = (103, 229, 207)
-BLUE = (126, 183, 255)
-GREEN = (93, 224, 170)
-TEXT = (242, 248, 250)
-MUTED = (166, 187, 202)
-RAIL = BORDER
 
-CONTENT_LEFT = 72
-CONTENT_RIGHT = WIDTH - CONTENT_LEFT
-NODE_X = [130, 365, 600, 835, 1070]
-NODE_Y = 239
-NODE_RADIUS = 22
+@dataclass(frozen=True)
+class Theme:
+    name: str
+    background: tuple[int, int, int]
+    text: tuple[int, int, int]
+    muted: tuple[int, int, int]
+    rail: tuple[int, int, int]
+    teal: tuple[int, int, int]
+    blue: tuple[int, int, int]
+    green: tuple[int, int, int]
+    idle_fill: tuple[int, int, int]
+    complete_fill: tuple[int, int, int]
+
+
+THEMES = (
+    Theme(
+        name="dark",
+        background=(13, 17, 23),  # GitHub dark canvas: #0d1117
+        text=(240, 246, 252),
+        muted=(139, 148, 158),
+        rail=(48, 54, 61),
+        teal=(45, 212, 191),
+        blue=(88, 166, 255),
+        green=(63, 185, 80),
+        idle_fill=(13, 17, 23),
+        complete_fill=(15, 45, 36),
+    ),
+    Theme(
+        name="light",
+        background=(255, 255, 255),  # GitHub light canvas: #ffffff
+        text=(31, 35, 40),
+        muted=(89, 99, 110),
+        rail=(208, 215, 222),
+        teal=(5, 125, 117),
+        blue=(9, 105, 218),
+        green=(26, 127, 55),
+        idle_fill=(255, 255, 255),
+        complete_fill=(218, 251, 225),
+    ),
+)
+
+
+CONTENT_LEFT = 58
+NODE_X = [112, 356, 600, 844, 1088]
+NODE_Y = 219
+NODE_RADIUS = 18
 STAGES = ["TASK", "AUDIT", "CALIBRATE", "GRADE", "EVIDENCE"]
 CAPTIONS = [
     "Load rubric and artifact",
@@ -53,71 +86,22 @@ CAPTIONS = [
     "Execute repeatable Pass@k trials",
     "Package scores and failure traces",
 ]
-ARRIVALS = [0.45, 1.85, 3.25, 4.65, 6.05]
-TRAVEL_STARTS = [1.35, 2.75, 4.15, 5.55]
-COMPLETE_AT = 6.95
+ARRIVALS = [0.40, 1.75, 3.10, 4.45, 5.80]
+TRAVEL_STARTS = [1.20, 2.55, 3.90, 5.25]
+COMPLETE_AT = 6.70
 
 
-def mix(
-    a: tuple[int, int, int],
-    b: tuple[int, int, int],
-    amount: float,
-) -> tuple[int, int, int]:
-    return tuple(round(x + (y - x) * amount) for x, y in zip(a, b))
+def clamp(value: float) -> float:
+    return max(0.0, min(1.0, value))
 
 
 def ease(value: float) -> float:
-    value = max(0.0, min(1.0, value))
+    value = clamp(value)
     return value * value * (3.0 - 2.0 * value)
 
 
-def make_background() -> Image.Image:
-    image = Image.new("RGB", (WIDTH, HEIGHT))
-    pixels = image.load()
-    for x in range(WIDTH):
-        horizontal = x / (WIDTH - 1)
-        color = mix(BACKGROUND_LEFT, BACKGROUND_RIGHT, horizontal)
-        for y in range(HEIGHT):
-            vertical = 1.0 - 0.085 * (y / HEIGHT)
-            pixels[x, y] = tuple(round(channel * vertical) for channel in color)
-
-    # Broad, blurred color fields add depth while keeping the reading plane quiet.
-    glow = Image.new("RGBA", image.size, (0, 0, 0, 0))
-    glow_draw = ImageDraw.Draw(glow, "RGBA")
-    glow_draw.ellipse((650, -260, 1370, 470), fill=(40, 110, 150, 34))
-    glow_draw.ellipse((-340, 120, 420, 860), fill=(42, 168, 151, 17))
-    glow = glow.filter(ImageFilter.GaussianBlur(88))
-    image = Image.alpha_composite(image.convert("RGBA"), glow)
-
-    texture = Image.new("RGBA", image.size, (0, 0, 0, 0))
-    draw = ImageDraw.Draw(texture, "RGBA")
-    # The very faint grid ties this panel to the profile hero without competing
-    # with the five-stage workflow.
-    for x in range(24, WIDTH, 72):
-        draw.line((x, 2, x, HEIGHT - 3), fill=(76, 154, 172, 10), width=1)
-    for y in range(38, HEIGHT, 56):
-        draw.line((2, y, WIDTH - 3, y), fill=(76, 154, 172, 8), width=1)
-    draw.rounded_rectangle(
-        (1, 1, WIDTH - 2, HEIGHT - 2),
-        radius=24,
-        outline=(*BORDER, 230),
-        width=2,
-    )
-    image.alpha_composite(texture)
-    return image
-
-
-def draw_infinity_mark(draw: ImageDraw.ImageDraw) -> None:
-    points = []
-    for point_index in range(97):
-        angle = point_index / 96 * math.tau
-        points.append(
-            (
-                1062 + 57 * math.cos(angle),
-                83 + 22 * math.sin(2 * angle),
-            )
-        )
-    draw.line(points, fill=(102, 132, 166, 175), width=2, joint="curve")
+def alpha_color(color: tuple[int, int, int], opacity: float) -> tuple[int, int, int, int]:
+    return (*color, round(255 * clamp(opacity)))
 
 
 def draw_centered_text(
@@ -129,51 +113,62 @@ def draw_centered_text(
     fill: tuple[int, int, int, int],
 ) -> None:
     bounds = draw.textbbox((0, 0), text, font=font)
-    width = bounds[2] - bounds[0]
-    draw.text((center_x - width / 2, y), text, font=font, fill=fill)
+    text_width = bounds[2] - bounds[0]
+    draw.text((center_x - text_width / 2, y), text, font=font, fill=fill)
 
 
-def draw_static() -> Image.Image:
-    image = make_background()
-    static_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
-    draw = ImageDraw.Draw(static_layer, "RGBA")
+def draw_infinity_mark(
+    draw: ImageDraw.ImageDraw,
+    theme: Theme,
+    opacity: float = 1.0,
+) -> None:
+    points = []
+    for point_index in range(121):
+        angle = point_index / 120 * math.tau
+        points.append(
+            (
+                1083 + 48 * math.cos(angle),
+                71 + 18 * math.sin(2 * angle),
+            )
+        )
+    draw.line(
+        points,
+        fill=alpha_color(theme.muted, 0.72 * opacity),
+        width=2,
+        joint="curve",
+    )
+
+
+def draw_static(theme: Theme) -> Image.Image:
+    # A flat theme-matched canvas makes the animation visually merge into the
+    # README, just like GitHub's contribution-snake assets.
+    image = Image.new("RGBA", (WIDTH, HEIGHT), (*theme.background, 255))
+    draw = ImageDraw.Draw(image, "RGBA")
 
     draw.text(
-        (CONTENT_LEFT, 38),
-        "INFINITY MEGATRON · PRIVATE R&D",
+        (CONTENT_LEFT, 27),
+        "INFINITY MEGATRON  ·  PRIVATE R&D",
         font=MONO_SMALL_BOLD,
-        fill=(*TEAL, 255),
+        fill=alpha_color(theme.teal, 1.0),
     )
     draw.text(
-        (CONTENT_LEFT, 67),
+        (CONTENT_LEFT, 54),
         "Enterprise grading",
         font=TITLE,
-        fill=(244, 248, 253, 255),
+        fill=alpha_color(theme.text, 1.0),
     )
     draw.text(
-        (CONTENT_LEFT, 126),
+        (CONTENT_LEFT, 109),
         "Auditable evaluation from task intake to evidence",
         font=SUBTITLE,
-        fill=(190, 207, 222, 255),
+        fill=alpha_color(theme.muted, 1.0),
     )
-    draw_infinity_mark(draw)
+    draw_infinity_mark(draw, theme)
 
-    draw.line(
-        (CONTENT_LEFT, 169, CONTENT_RIGHT, 169),
-        fill=(*BORDER, 145),
-        width=2,
-    )
-
-    draw.rounded_rectangle(
-        (CONTENT_LEFT, 194, CONTENT_RIGHT, 305),
-        radius=18,
-        fill=(4, 19, 32, 155),
-        outline=(52, 95, 119, 150),
-        width=2,
-    )
-    draw.line((NODE_X[0], NODE_Y, NODE_X[-1], NODE_Y), fill=RAIL, width=4)
-
-    for center_x, label in zip(NODE_X, STAGES):
+    # The rail belongs to the workflow itself; there is no surrounding panel,
+    # strip, frame, grid, or decorative divider.
+    draw.line((NODE_X[0], NODE_Y, NODE_X[-1], NODE_Y), fill=(*theme.rail, 255), width=3)
+    for index, (center_x, label) in enumerate(zip(NODE_X, STAGES), start=1):
         draw.ellipse(
             (
                 center_x - NODE_RADIUS,
@@ -181,42 +176,27 @@ def draw_static() -> Image.Image:
                 center_x + NODE_RADIUS,
                 NODE_Y + NODE_RADIUS,
             ),
-            fill=(9, 27, 44, 255),
-            outline=(61, 89, 114, 255),
+            fill=(*theme.idle_fill, 255),
+            outline=(*theme.rail, 255),
             width=3,
         )
-    draw.rounded_rectangle(
-        (CONTENT_LEFT, 325, CONTENT_RIGHT, 380),
-        radius=14,
-        fill=(4, 18, 30, 228),
-        outline=(52, 95, 119, 220),
-        width=2,
-    )
-    draw.line((310, 337, 310, 368), fill=(52, 95, 119, 210), width=2)
-    image.alpha_composite(static_layer)
+        draw_centered_text(
+            draw,
+            center_x,
+            251,
+            label,
+            STAGE_LABEL,
+            alpha_color(theme.muted, 1.0),
+        )
+        draw_centered_text(
+            draw,
+            center_x,
+            181,
+            f"0{index}",
+            MONO_SMALL_BOLD,
+            alpha_color(theme.muted, 0.78),
+        )
     return image
-
-
-def glow_dot(
-    image: Image.Image,
-    center_x: int,
-    center_y: int,
-    color: tuple[int, int, int],
-    opacity: float,
-) -> None:
-    layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
-    draw = ImageDraw.Draw(layer, "RGBA")
-    alpha = round(70 * opacity)
-    draw.ellipse(
-        (center_x - 12, center_y - 12, center_x + 12, center_y + 12),
-        fill=(*color, alpha),
-    )
-    image.alpha_composite(layer.filter(ImageFilter.GaussianBlur(7)))
-    draw = ImageDraw.Draw(image, "RGBA")
-    draw.ellipse(
-        (center_x - 5, center_y - 5, center_x + 5, center_y + 5),
-        fill=(*color, round(245 * opacity)),
-    )
 
 
 def current_stage(elapsed: float) -> int:
@@ -241,58 +221,85 @@ def packet_position(elapsed: float) -> float:
 
 
 def detail_alpha(elapsed: float, stage_index: int) -> float:
-    fade = ease((elapsed - ARRIVALS[stage_index]) / 0.16)
+    fade = ease((elapsed - ARRIVALS[stage_index]) / 0.18)
     if stage_index < len(STAGES) - 1:
-        fade *= ease((ARRIVALS[stage_index + 1] - elapsed) / 0.16)
+        fade *= ease((ARRIVALS[stage_index + 1] - elapsed) / 0.18)
     else:
-        fade *= ease((COMPLETE_AT - elapsed) / 0.16)
+        fade *= ease((COMPLETE_AT - elapsed) / 0.18)
     return fade
 
 
-def draw_detail_strip(
-    draw: ImageDraw.ImageDraw,
-    heading: str,
-    caption: str,
-    step: str,
-    color: tuple[int, int, int],
+def glow_dot(
+    image: Image.Image,
+    center_x: int,
+    center_y: int,
+    theme: Theme,
     opacity: float,
 ) -> None:
-    alpha = round(255 * opacity)
-    draw.text((98, 341), heading, font=MONO_BOLD, fill=(*color, alpha))
-    draw.text((336, 341), caption, font=MONO, fill=(*TEXT, alpha))
-    draw.text(
-        (1104, 343),
-        step,
-        font=MONO_SMALL_BOLD,
-        anchor="ra",
-        fill=(*MUTED, alpha),
+    glow = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    glow_draw = ImageDraw.Draw(glow, "RGBA")
+    glow_draw.ellipse(
+        (center_x - 11, center_y - 11, center_x + 11, center_y + 11),
+        fill=alpha_color(theme.blue, 0.32 * opacity),
+    )
+    image.alpha_composite(glow.filter(ImageFilter.GaussianBlur(6)))
+    draw = ImageDraw.Draw(image, "RGBA")
+    draw.ellipse(
+        (center_x - 4, center_y - 4, center_x + 4, center_y + 4),
+        fill=alpha_color(theme.blue, 0.98 * opacity),
     )
 
 
-def render_frame(base: Image.Image, frame_index: int) -> Image.Image:
+def draw_current_detail(
+    draw: ImageDraw.ImageDraw,
+    theme: Theme,
+    stage_index: int,
+    opacity: float,
+) -> None:
+    step = f"STEP {stage_index + 1} / 5"
+    caption = CAPTIONS[stage_index]
+    step_bounds = draw.textbbox((0, 0), step, font=MONO_SMALL_BOLD)
+    caption_bounds = draw.textbbox((0, 0), caption, font=MONO)
+    gap = 18
+    total_width = (step_bounds[2] - step_bounds[0]) + gap + (caption_bounds[2] - caption_bounds[0])
+    start_x = (WIDTH - total_width) / 2
+    draw.text(
+        (start_x, 310),
+        step,
+        font=MONO_SMALL_BOLD,
+        fill=alpha_color(theme.teal, opacity),
+    )
+    draw.text(
+        (start_x + (step_bounds[2] - step_bounds[0]) + gap, 306),
+        caption,
+        font=MONO,
+        fill=alpha_color(theme.text, opacity),
+    )
+
+
+def render_frame(base: Image.Image, theme: Theme, frame_index: int) -> Image.Image:
     elapsed = frame_index / FPS
     image = base.copy()
     motion = Image.new("RGBA", image.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(motion, "RGBA")
 
-    loop_opacity = min(
-        ease(elapsed / 0.45),
-        ease((SECONDS - elapsed) / 0.45),
-    )
+    loop_opacity = min(ease(elapsed / 0.42), ease((SECONDS - elapsed) / 0.42))
     stage_index = current_stage(elapsed)
     packet_x = packet_position(elapsed)
+    progress_color = theme.green if elapsed >= COMPLETE_AT else theme.teal
 
-    # The filled rail and packet are the single continuous motion through the system.
-    progress_color = GREEN if elapsed >= COMPLETE_AT else TEAL
     draw.line(
         (NODE_X[0], NODE_Y, round(packet_x), NODE_Y),
-        fill=(*progress_color, round(230 * loop_opacity)),
-        width=4,
+        fill=alpha_color(progress_color, 0.98 * loop_opacity),
+        width=3,
     )
 
     for index, center_x in enumerate(NODE_X):
         completed_at = TRAVEL_STARTS[index] if index < len(TRAVEL_STARTS) else COMPLETE_AT
-        if elapsed >= completed_at:
+        is_complete = elapsed >= completed_at
+        is_active = index == stage_index and not is_complete
+
+        if is_complete:
             draw.ellipse(
                 (
                     center_x - NODE_RADIUS,
@@ -300,27 +307,26 @@ def render_frame(base: Image.Image, frame_index: int) -> Image.Image:
                     center_x + NODE_RADIUS,
                     NODE_Y + NODE_RADIUS,
                 ),
-                fill=(12, 42, 53, round(255 * loop_opacity)),
-                outline=(*GREEN, round(255 * loop_opacity)),
+                fill=alpha_color(theme.complete_fill, loop_opacity),
+                outline=alpha_color(theme.green, loop_opacity),
                 width=3,
             )
             draw.line(
                 (
-                    center_x - 9,
+                    center_x - 7,
                     NODE_Y,
-                    center_x - 2,
-                    NODE_Y + 7,
-                    center_x + 11,
-                    NODE_Y - 9,
+                    center_x - 1,
+                    NODE_Y + 6,
+                    center_x + 9,
+                    NODE_Y - 7,
                 ),
-                fill=(*GREEN, round(255 * loop_opacity)),
-                width=4,
+                fill=alpha_color(theme.green, loop_opacity),
+                width=3,
                 joint="curve",
             )
-        elif index == stage_index:
-            arrival = ARRIVALS[index]
-            pulse_progress = max(0.0, min(1.0, (elapsed - arrival) / 0.30))
-            pulse_radius = NODE_RADIUS + round(5 * math.sin(pulse_progress * math.pi))
+        elif is_active:
+            pulse = 0.5 + 0.5 * math.sin((elapsed - ARRIVALS[index]) * math.tau / 0.85)
+            pulse_radius = NODE_RADIUS + 2 + round(3 * pulse)
             draw.ellipse(
                 (
                     center_x - pulse_radius,
@@ -328,79 +334,112 @@ def render_frame(base: Image.Image, frame_index: int) -> Image.Image:
                     center_x + pulse_radius,
                     NODE_Y + pulse_radius,
                 ),
-                fill=(10, 34, 51, round(245 * loop_opacity)),
-                outline=(*BLUE, round(255 * loop_opacity)),
+                outline=alpha_color(theme.blue, (0.42 + 0.35 * pulse) * loop_opacity),
+                width=2,
+            )
+            draw.ellipse(
+                (
+                    center_x - NODE_RADIUS,
+                    NODE_Y - NODE_RADIUS,
+                    center_x + NODE_RADIUS,
+                    NODE_Y + NODE_RADIUS,
+                ),
+                fill=alpha_color(theme.idle_fill, loop_opacity),
+                outline=alpha_color(theme.teal, loop_opacity),
                 width=3,
             )
 
-        label_color = MUTED
-        label_opacity = 210
-        if elapsed >= completed_at:
-            label_color = GREEN
-            label_opacity = 245
-        elif index == stage_index:
-            label_color = TEAL
-            label_opacity = 255
+        if is_complete:
+            label_color = theme.green
+        elif is_active:
+            label_color = theme.teal
+        else:
+            label_color = theme.muted
         draw_centered_text(
             draw,
             center_x,
-            272,
+            251,
             STAGES[index],
             STAGE_LABEL,
-            (*label_color, round(label_opacity * loop_opacity)),
+            alpha_color(label_color, loop_opacity),
         )
 
     if elapsed < COMPLETE_AT:
-        glow_dot(
-            motion,
-            round(packet_x),
-            NODE_Y,
-            BLUE,
-            loop_opacity,
-        )
-
-    if elapsed < COMPLETE_AT:
-        opacity = detail_alpha(elapsed, stage_index) * loop_opacity
-        draw_detail_strip(
+        glow_dot(motion, round(packet_x), NODE_Y, theme, loop_opacity)
+        draw_current_detail(
             draw,
-            STAGES[stage_index],
-            CAPTIONS[stage_index],
-            f"STEP {stage_index + 1} / 5",
-            TEAL,
-            opacity,
+            theme,
+            stage_index,
+            detail_alpha(elapsed, stage_index) * loop_opacity,
         )
     else:
-        ready_opacity = ease((elapsed - COMPLETE_AT) / 0.16) * loop_opacity
-        draw.rounded_rectangle(
-            (CONTENT_LEFT, 325, CONTENT_RIGHT, 380),
-            radius=14,
-            outline=(*GREEN, round(210 * ready_opacity)),
-            width=2,
+        ready_opacity = ease((elapsed - COMPLETE_AT) / 0.22) * loop_opacity
+        step = "5 / 5"
+        caption = "Evidence ready  ·  scores · traces · audit metadata packaged"
+        step_bounds = draw.textbbox((0, 0), step, font=MONO_SMALL_BOLD)
+        caption_bounds = draw.textbbox((0, 0), caption, font=MONO)
+        gap = 18
+        total_width = (step_bounds[2] - step_bounds[0]) + gap + (caption_bounds[2] - caption_bounds[0])
+        start_x = (WIDTH - total_width) / 2
+        draw.text(
+            (start_x, 310),
+            step,
+            font=MONO_SMALL_BOLD,
+            fill=alpha_color(theme.green, ready_opacity),
         )
-        draw_detail_strip(
-            draw,
-            "EVIDENCE READY",
-            "scores · traces · audit metadata packaged",
-            "5 / 5",
-            GREEN,
-            ready_opacity,
+        draw.text(
+            (start_x + (step_bounds[2] - step_bounds[0]) + gap, 306),
+            caption,
+            font=MONO,
+            fill=alpha_color(theme.text, ready_opacity),
         )
 
     image.alpha_composite(motion)
     return image.convert("RGB")
 
 
-def main() -> None:
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    base = draw_static()
-    raw_frames = [render_frame(base, index) for index in range(FRAME_COUNT)]
-    palette = raw_frames[-8].quantize(colors=96, method=Image.Quantize.MEDIANCUT)
-    frames = [
-        frame.quantize(palette=palette, dither=Image.Dither.NONE)
-        for frame in raw_frames
-    ]
+def build_palette(theme: Theme, source: Image.Image) -> Image.Image:
+    """Keep the README canvas color exact after GIF palette conversion."""
+    reduced = source.quantize(colors=95, method=Image.Quantize.MEDIANCUT)
+    reduced_palette = reduced.getpalette() or []
+    used_indexes = sorted(index for _count, index in (reduced.getcolors() or []))
+    colors = [theme.background]
+    for index in used_indexes:
+        offset = index * 3
+        color = tuple(reduced_palette[offset : offset + 3])
+        if len(color) == 3 and color not in colors:
+            colors.append(color)
+
+    palette_values = [channel for color in colors[:96] for channel in color]
+    palette_values.extend([0] * (768 - len(palette_values)))
+    palette = Image.new("P", (1, 1), 0)
+    palette.putpalette(palette_values)
+    return palette
+
+
+def quantize_frame(
+    theme: Theme,
+    frame: Image.Image,
+    palette: Image.Image,
+) -> Image.Image:
+    quantized = frame.quantize(palette=palette, dither=Image.Dither.NONE)
+    background = Image.new("RGB", frame.size, theme.background)
+    difference = ImageChops.difference(frame, background)
+    red, green, blue = difference.split()
+    maximum_difference = ImageChops.lighter(ImageChops.lighter(red, green), blue)
+    exact_background = maximum_difference.point(lambda value: 255 if value == 0 else 0)
+    quantized.paste(0, mask=exact_background)
+    return quantized
+
+
+def encode_theme(theme: Theme) -> Path:
+    output = ASSET_DIR / f"infinity-grading-flow-{theme.name}.gif"
+    base = draw_static(theme)
+    raw_frames = [render_frame(base, theme, index) for index in range(FRAME_COUNT)]
+    palette_source = build_palette(theme, raw_frames[round(COMPLETE_AT * FPS)])
+    frames = [quantize_frame(theme, frame, palette_source) for frame in raw_frames]
     frames[0].save(
-        OUTPUT,
+        output,
         save_all=True,
         append_images=frames[1:],
         duration=[80 if index % 3 != 2 else 90 for index in range(FRAME_COUNT)],
@@ -409,9 +448,16 @@ def main() -> None:
         disposal=1,
     )
     print(
-        f"wrote {OUTPUT} "
-        f"({OUTPUT.stat().st_size / 1024:.1f} KiB, {FRAME_COUNT} frames)"
+        f"wrote {output} "
+        f"({output.stat().st_size / 1024:.1f} KiB, {FRAME_COUNT} frames)"
     )
+    return output
+
+
+def main() -> None:
+    ASSET_DIR.mkdir(parents=True, exist_ok=True)
+    for theme in THEMES:
+        encode_theme(theme)
 
 
 if __name__ == "__main__":
