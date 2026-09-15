@@ -1,7 +1,7 @@
 <div align="center">
   <img src="assets/profile-graph-hero.gif" width="100%" alt="Numan S. — AI evaluation, verifier engineering, and reproducible infrastructure" />
 
-  <br/><br/>
+  <br/>
 
   <p><strong>AI EVALUATION &nbsp;·&nbsp; VERIFIER ENGINEERING &nbsp;·&nbsp; REPRODUCIBLE INFRASTRUCTURE</strong></p>
 
@@ -22,7 +22,7 @@
 
 <sub>BENCHMARK DESIGN &nbsp;·&nbsp; EVALUATION SYSTEMS &nbsp;·&nbsp; RELIABLE INFRASTRUCTURE</sub>
 
-<br/><br/>
+<br/>
 
 ### Replica reconciliation
 
@@ -43,11 +43,7 @@ All five trials completed without infrastructure errors. In the two trajectories
 
 </details>
 
-<br/>
-
 ---
-
-<br/>
 
 ### Enterprise grading
 
@@ -63,11 +59,7 @@ I built the enterprise grading layer for **Infinity Megatron**, a private AI-age
 
 <p align="center"><sub>Private implementation &nbsp;·&nbsp; The animation presents the workflow at a high level</sub></p>
 
-<br/>
-
 ---
-
-<br/>
 
 ### Evaluator reliability
 
@@ -77,8 +69,6 @@ I submitted targeted patches for cross-platform process launching, UTF-8-safe I/
 
 **[View the submitted patches →](https://github.com/Handshake-AI-Research/gandalf-the-grader/pulls?q=is%3Apr+author%3ANuman5837)**
 
-<br/>
-
 ## How I work
 
 - **Build from controlled state.** Derive expected results from data held by the verifier.
@@ -86,15 +76,11 @@ I submitted targeted patches for cross-platform process launching, UTF-8-safe I/
 - **Protect the evaluation.** Isolate agent code from fixtures, answers, and rewards.
 - **Study the failures.** Use trajectories to separate capability gaps from task defects.
 
-<br/>
-
 ## Technical toolkit
 
 <p align="center">
   <img src="https://skillicons.dev/icons?i=py,docker,kubernetes,aws,githubactions,linux,bash,powershell&theme=dark&perline=8" alt="Python, Docker, Kubernetes, AWS, GitHub Actions, Linux, Bash, and PowerShell" />
 </p>
-
-<br/>
 
 ## Contribution activity
 
