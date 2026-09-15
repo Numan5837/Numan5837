@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
+  <title id="title">Numan S.</title>
+  <desc id="desc">Agent evaluation, verifier engineering, and cloud-native systems</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="0.55" stop-color="#0d1b2d"/>
+      <stop offset="1" stop-color="#15253b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#59d6c7"/>
+      <stop offset="0.5" stop-color="#6aa7ff"/>
+      <stop offset="1" stop-color="#a886ff"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#8fb3d9" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="300" rx="22" fill="url(#bg)"/>
+  <rect width="1200" height="300" rx="22" fill="url(#grid)"/>
+  <circle cx="1090" cy="40" r="150" fill="#6a7dff" opacity="0.08"/>
+  <circle cx="90" cy="285" r="150" fill="#41d6bd" opacity="0.06"/>
+
+  <g transform="translate(74 54)">
+    <rect x="0" y="0" width="52" height="52" rx="12" fill="#10243a" stroke="#59d6c7" stroke-width="2"/>
+    <path d="M14 17 L24 26 L14 35 M29 35 H40" fill="none" stroke="#75e5d7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <text x="0" y="112" fill="#f3f7fc" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="58" font-weight="700" letter-spacing="1">Numan S.</text>
+    <rect x="0" y="132" width="510" height="4" rx="2" fill="url(#accent)" filter="url(#glow)"/>
+    <text x="0" y="176" fill="#b9c9dc" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="23" letter-spacing="0.6">Agent evaluation · Verifier engineering · Cloud-native systems</text>
+  </g>
+
+  <g transform="translate(798 187)" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="16">
+    <rect x="0" y="0" width="98" height="38" rx="19" fill="#10243a" stroke="#294964"/>
+    <text x="49" y="25" text-anchor="middle" fill="#75e5d7">Python</text>
+    <rect x="110" y="0" width="98" height="38" rx="19" fill="#10243a" stroke="#294964"/>
+    <text x="159" y="25" text-anchor="middle" fill="#82b5ff">Docker</text>
+    <rect x="220" y="0" width="108" height="38" rx="19" fill="#10243a" stroke="#294964"/>
+    <text x="274" y="25" text-anchor="middle" fill="#b79cff">Harbor</text>
+  </g>
+</svg>
