@@ -18,6 +18,12 @@ jobs:
     timeout-minutes: 5
 
     steps:
+      - name: Check out the profile generator
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
       - name: Generate themed contribution animations
         uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3.5.0
         with:
@@ -26,6 +32,15 @@ jobs:
           outputs: |
             dist/github-contribution-grid-snake.svg?palette=github-light&color_snake=#3b82f6&color_dots=#ebedf0,#c6f6ed,#7fe3d0,#68a5ff,#8b5cf6
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=#55e6cc&color_dots=#161b22,#0e3437,#176c6b,#3d7bd9,#a886ff
+
+      - name: Add live activity counters
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >-
+          python scripts/enhance_contribution_snake.py
+          --username "${{ github.repository_owner }}"
+          --light dist/github-contribution-grid-snake.svg
+          --dark dist/github-contribution-grid-snake-dark.svg
 
       - name: Publish the output branch
         uses: crazy-max/ghaction-github-pages@1d6ee9b181a81033a16bd707a1401afa978daab4 # v5.0.0
