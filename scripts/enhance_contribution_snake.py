@@ -9,6 +9,7 @@ import os
 import re
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
@@ -23,13 +24,12 @@ query($login: String!) {
     contributionsCollection {
       contributionCalendar {
         totalContributions
+        weeks {
+          contributionDays {
+            contributionCount
+          }
+        }
       }
-    }
-    pullRequests(first: 1) {
-      totalCount
-    }
-    mergedPullRequests: pullRequests(first: 1, states: MERGED) {
-      totalCount
     }
     repositories(first: 1, ownerAffiliations: OWNER, privacy: PUBLIC) {
       totalCount
@@ -44,7 +44,7 @@ NUMBER_ROW_HEIGHT = 34
 @dataclass(frozen=True)
 class ActivityStats:
     pull_requests: int
-    merged_pull_requests: int
+    active_days: int
     contributions: int
     public_repositories: int
 
@@ -113,14 +113,39 @@ def require_nonnegative_int(value: Any, field: str) -> int:
 def stats_from_mapping(payload: dict[str, Any]) -> ActivityStats:
     return ActivityStats(
         pull_requests=require_nonnegative_int(payload.get("pull_requests"), "pull_requests"),
-        merged_pull_requests=require_nonnegative_int(
-            payload.get("merged_pull_requests"), "merged_pull_requests"
-        ),
+        active_days=require_nonnegative_int(payload.get("active_days"), "active_days"),
         contributions=require_nonnegative_int(payload.get("contributions"), "contributions"),
         public_repositories=require_nonnegative_int(
             payload.get("public_repositories"), "public_repositories"
         ),
     )
+
+
+def fetch_public_pull_requests(username: str) -> int:
+    query = urllib.parse.urlencode(
+        {"q": f"is:pr author:{username}", "per_page": "1"}
+    )
+    # A repository-scoped Actions token filters this search to its installation.
+    # An unauthenticated request returns the full public profile count instead.
+    request = urllib.request.Request(
+        f"https://api.github.com/search/issues?{query}",
+        headers={
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "Numan5837-profile-workflow",
+            "X-GitHub-Api-Version": "2022-11-28",
+        },
+    )
+
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            payload = json.load(response)
+    except urllib.error.HTTPError as error:
+        details = error.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"GitHub search returned HTTP {error.code}: {details}") from error
+    except urllib.error.URLError as error:
+        raise RuntimeError(f"Could not reach GitHub search: {error.reason}") from error
+
+    return require_nonnegative_int(payload.get("total_count"), "pull_requests")
 
 
 def fetch_stats(username: str, token: str) -> ActivityStats:
@@ -154,15 +179,28 @@ def fetch_stats(username: str, token: str) -> ActivityStats:
     if user is None:
         raise RuntimeError(f"GitHub user {username!r} was not found")
 
+    calendar = user.get("contributionsCollection", {}).get(
+        "contributionCalendar", {}
+    )
+    contribution_days = [
+        day
+        for week in calendar.get("weeks", [])
+        for day in week.get("contributionDays", [])
+    ]
+    active_days = sum(
+        1
+        for day in contribution_days
+        if require_nonnegative_int(
+            day.get("contributionCount"), "contributionCount"
+        )
+        > 0
+    )
+
     return stats_from_mapping(
         {
-            "pull_requests": user.get("pullRequests", {}).get("totalCount"),
-            "merged_pull_requests": user.get("mergedPullRequests", {}).get("totalCount"),
-            "contributions": (
-                user.get("contributionsCollection", {})
-                .get("contributionCalendar", {})
-                .get("totalContributions")
-            ),
+            "pull_requests": fetch_public_pull_requests(username),
+            "active_days": active_days,
+            "contributions": calendar.get("totalContributions"),
             "public_repositories": user.get("repositories", {}).get("totalCount"),
         }
     )
@@ -286,7 +324,7 @@ def build_overlay(
 
     items = [
         ("PULL REQUESTS", stats.pull_requests),
-        ("MERGED PRS", stats.merged_pull_requests),
+        ("ACTIVE DAYS", stats.active_days),
         ("CONTRIBUTIONS", stats.contributions),
         ("PUBLIC REPOS", stats.public_repositories),
     ]
@@ -412,7 +450,7 @@ def main() -> int:
 
     print(
         "Added live activity counters: "
-        f"PRs={stats.pull_requests}, merged={stats.merged_pull_requests}, "
+        f"public PRs={stats.pull_requests}, active days={stats.active_days}, "
         f"contributions={stats.contributions}, public repos={stats.public_repositories}"
     )
     return 0
