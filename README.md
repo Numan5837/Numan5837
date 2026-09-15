@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/profile-typing-hero.gif" width="100%" alt="Numan S. — AI evaluation, verifier engineering, and reproducible infrastructure" />
+  <img src="assets/profile-typewriter-hero.gif" width="100%" alt="Numan S. — AI evaluation, verifier engineering, and reproducible infrastructure" />
 
   <br/>
 

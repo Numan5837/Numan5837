@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "assets" / "profile-typing-hero.gif"
+OUTPUT = ROOT / "assets" / "profile-typewriter-hero.gif"
 
 WIDTH, HEIGHT = 1200, 420
 FPS = 16
@@ -15,7 +15,6 @@ FRAME_COUNT = FPS * SECONDS
 
 BACKGROUND_LEFT = (4, 13, 23)
 BACKGROUND_RIGHT = (7, 29, 43)
-BORDER = (37, 77, 96)
 TEAL = (103, 229, 207)
 BLUE = (140, 196, 236)
 TEXT = (242, 248, 250)
@@ -83,13 +82,6 @@ def make_background() -> Image.Image:
     glow = glow.filter(ImageFilter.GaussianBlur(100))
     image = Image.alpha_composite(image.convert("RGBA"), glow)
 
-    draw = ImageDraw.Draw(image, "RGBA")
-    draw.rounded_rectangle(
-        (1, 1, WIDTH - 2, HEIGHT - 2),
-        radius=25,
-        outline=(*BORDER, 210),
-        width=2,
-    )
     return image
 
 
