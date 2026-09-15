@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="assets/header.svg" width="100%" alt="Numan S. — Agent evaluation, verifier engineering, and cloud-native systems" />
+  <img src="assets/header.gif" width="100%" alt="Numan S. — animated agent evaluation and verifier engineering banner" />
 </p>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/numan-s-b622bb250/"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
-  <a href="https://github.com/harbor-framework/terminal-bench/pull/1969"><img src="https://img.shields.io/badge/Terminal--Bench-TB5_candidate-6E56CF?style=flat-square" alt="Terminal-Bench TB5 candidate" /></a>
-  <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests"><img src="https://img.shields.io/badge/Open_source-My_pull_requests-238636?style=flat-square&logo=github" alt="Open-source pull requests" /></a>
+  <a href="https://www.linkedin.com/in/numan-s-b622bb250/"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+  <a href="https://github.com/harbor-framework/terminal-bench/pull/1969"><img src="https://img.shields.io/badge/Terminal--Bench-TB5_candidate-6E56CF?style=for-the-badge" alt="Terminal-Bench TB5 candidate" /></a>
+  <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests"><img src="https://img.shields.io/badge/Open_source-Pull_requests-238636?style=for-the-badge&logo=github" alt="Open-source pull requests" /></a>
 </p>
 
 I build containerized benchmarks and verification tooling for AI agents. My focus is exact grading, adversarial testing, reproducible environments, and failure analysis that explains what an agent could not solve.
@@ -47,7 +47,14 @@ Each contribution is kept small enough to review independently and is clearly la
 
 ## Toolbox
 
-`Python` · `Docker` · `Kubernetes` · `AWS` · `Harbor` · `GitHub Actions` · `Linux` · `Bash` · `PowerShell` · `OpenRouter`
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=py,docker,kubernetes,aws,githubactions,linux,bash,powershell&theme=dark&perline=8" alt="Python, Docker, Kubernetes, AWS, GitHub Actions, Linux, Bash, and PowerShell" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Harbor-60B932?style=for-the-badge&logo=harbor&logoColor=white" alt="Harbor" />
+  <img src="https://img.shields.io/badge/OpenRouter-111827?style=for-the-badge" alt="OpenRouter" />
+</p>
 
 ## Current focus
 
