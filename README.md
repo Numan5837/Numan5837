@@ -11,7 +11,6 @@
 </p>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/numan-s-b622bb250/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" height="28" alt="LinkedIn" /></a>&nbsp;
   <a href="https://github.com/harbor-framework/terminal-bench/pull/1969"><img src="https://img.shields.io/badge/Terminal--Bench_%231969-0B6477?style=for-the-badge&logo=gnometerminal&logoColor=white" height="28" alt="Terminal-Bench pull request 1969" /></a>&nbsp;
   <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests"><img src="https://img.shields.io/badge/Open--source_PRs-24292F?style=for-the-badge&logo=github&logoColor=white" height="28" alt="Open-source pull requests" /></a>
 </p>
@@ -106,5 +105,4 @@ The public part of this work continues through benchmark and evaluator pull requ
 
 <div align="center">
   <p><strong>Interested in difficult agent evaluations, exact verifiers, and the infrastructure behind trustworthy scores.</strong></p>
-  <p><a href="https://www.linkedin.com/in/numan-s-b622bb250/">If you are working on the same problems, I would be glad to compare approaches →</a></p>
 </div>
