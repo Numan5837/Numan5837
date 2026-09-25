@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/harbor-framework/terminal-bench/pull/1969"><img src="https://img.shields.io/badge/Terminal--Bench_%231969-0B6477?style=for-the-badge&logo=gnometerminal&logoColor=white" height="28" alt="Terminal-Bench pull request 1969" /></a>&nbsp;
+  <a href="https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837"><img src="https://img.shields.io/badge/Terminal--Bench_contributions-0B6477?style=for-the-badge&logo=gnometerminal&logoColor=white" height="28" alt="My Terminal-Bench pull requests" /></a>&nbsp;
   <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests"><img src="https://img.shields.io/badge/Open--source_PRs-24292F?style=for-the-badge&logo=github&logoColor=white" height="28" alt="Open-source pull requests" /></a>
 </p>
 
@@ -23,7 +23,16 @@ I work from a difficult agent task to the evidence needed to trust its result. T
 
 ### Step 01 · Design the challenge
 
-**Terminal-Bench — replica reconciliation** &nbsp;·&nbsp; `OPEN TB5 CANDIDATE`
+I build Terminal-Bench tasks around operational decisions with outcomes that can be checked directly. My pull requests to Harbor are listed below and refreshed automatically as their status changes.
+
+<!-- harbor-prs:start -->
+**2 pull requests** · [View all on Harbor](https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837)
+
+- [#1985 · Recover coupon substitution trees from delayed fulfillment](https://github.com/harbor-framework/terminal-bench/pull/1985) · `OPEN`
+- [#1969 · Reconcile drifting replicas within a transfer budget](https://github.com/harbor-framework/terminal-bench/pull/1969) · `OPEN`
+<!-- harbor-prs:end -->
+
+**A closer look at replica reconciliation.**
 
 I designed a database reliability task that asks an agent to recover exact record drift from compressed replica sketches, choose one retry, and stay within a strict transfer budget.
 
