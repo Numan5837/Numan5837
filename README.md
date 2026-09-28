@@ -26,8 +26,9 @@ I work from a difficult agent task to the evidence needed to trust its result. T
 I build Terminal-Bench tasks around operational decisions with outcomes that can be checked directly. My pull requests to Harbor are listed below and refreshed automatically as their status changes.
 
 <!-- harbor-prs:start -->
-**2 pull requests** · [View all on Harbor](https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837)
+**3 pull requests** · [View all on Harbor](https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837)
 
+- [#2115 · Plan claims staffing from an incomplete backlog](https://github.com/harbor-framework/terminal-bench/pull/2115) · `OPEN`
 - [#1985 · Recover coupon substitution trees from delayed fulfillment](https://github.com/harbor-framework/terminal-bench/pull/1985) · `OPEN`
 - [#1969 · Reconcile drifting replicas within a transfer budget](https://github.com/harbor-framework/terminal-bench/pull/1969) · `OPEN`
 <!-- harbor-prs:end -->
