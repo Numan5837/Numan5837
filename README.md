@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  I build containerized benchmarks that make agent failures measurable,<br/>reproducible, and useful for improving evaluation systems.
+  I design research-grounded tasks and containerized benchmarks across mathematics,<br/>machine learning research, operations, and data engineering.
 </p>
 
 <p align="center">
@@ -15,7 +15,37 @@
   <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests"><img src="https://img.shields.io/badge/Open--source_PRs-24292F?style=for-the-badge&logo=github&logoColor=white" height="28" alt="Open-source pull requests" /></a>
 </p>
 
-## 01 / From challenge to evidence
+## 01 / AI research & benchmark experience
+
+My work spans benchmark task development with **Handshake AI** and **Turing**, alongside verifier engineering, evaluation infrastructure, and open-source contributions.
+
+### Handshake AI · Project Dynamo & Project Insight
+
+I worked on **Terminal-Bench 2 through Project Dynamo** and **Terminal-Bench 3 through Project Insight**, developing tasks across **Operations, Mathematics, Machine Learning Research, and Data Engineering**. My focus is turning domain problems into executable challenges with clear instructions, reproducible environments, and outcomes that can be checked.
+
+| Project | Benchmark | Contribution |
+| --- | --- | --- |
+| **Project Dynamo** | Terminal-Bench 2 | Domain-focused benchmark task development for evaluating AI agents working in terminal environments. |
+| **Project Insight** | Terminal-Bench 3 | Benchmark task development across operations, mathematics, machine learning research, and data engineering. |
+
+### Turing · Terminal-Bench tasks for Meta
+
+I work with **Turing on Terminal-Bench tasks for Meta**, including scientific-domain and mathematical benchmark development. This work brings together research-led problem selection, precise task specifications, reference solutions, verifier design, and reproducible execution.
+
+My scientific and mathematics work emphasizes a substantive reasoning challenge: a compact problem whose solution requires the underlying mathematics, with independently checkable results. I develop and review task packages, examine solver trajectories, and use validation evidence to distinguish reasoning failures from verifier defects or infrastructure problems.
+
+### Domains I work in
+
+| Domain | Task focus |
+| --- | --- |
+| **Scientific domains & Mathematics** | Research-grounded problems, applied mathematics, numerical reasoning, and proof or certificate-based verification. |
+| **Machine Learning Research** | Reproducible research workflows, experiment analysis, model evaluation, and evidence-based interpretation of results. |
+| **Operations** | Planning under constraints, staffing and backlog decisions, logistics, and resource allocation. |
+| **Data Engineering** | Data processing and validation, database reliability, consistency checks, and replica reconciliation. |
+
+Across these domains, I connect task design with reference solutions, automated grading, containerized environments, and failure analysis. The public examples below show that workflow in practice.
+
+## 02 / From challenge to evidence
 
 I work from a difficult agent task to the evidence needed to trust its result. The projects below follow that same path: design the challenge, build the grading system, then harden the evaluator.
 
@@ -23,7 +53,7 @@ I work from a difficult agent task to the evidence needed to trust its result. T
 
 ### Step 01 · Design the challenge
 
-I build Terminal-Bench tasks around operational decisions with outcomes that can be checked directly. My pull requests to Harbor are listed below and refreshed automatically as their status changes.
+My public Terminal-Bench contributions include operational decisions and database reliability challenges with outcomes that can be checked directly. My pull requests to Harbor are listed below and refreshed automatically as their status changes.
 
 <!-- harbor-prs:start -->
 **3 pull requests** · [View all on Harbor](https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837)
@@ -79,7 +109,7 @@ I submitted targeted patches for cross-platform process launching, UTF-8-safe I/
 
 **[View the submitted patches →](https://github.com/Handshake-AI-Research/gandalf-the-grader/pulls?q=is%3Apr+author%3ANuman5837)**
 
-## 02 / The evaluation loop
+## 03 / The evaluation loop
 
 Across these projects, I use one repeatable process:
 
@@ -89,7 +119,7 @@ Across these projects, I use one repeatable process:
 4. **Protect the evaluation.** Isolate agent code from fixtures, answers, and rewards.
 5. **Study and harden.** Use trajectories to separate capability gaps from task defects, then improve the evaluator.
 
-## 03 / Toolkit
+## 04 / Toolkit
 
 | Evaluate | Reproduce | Automate |
 | --- | --- | --- |
@@ -99,7 +129,7 @@ Across these projects, I use one repeatable process:
   <img src="https://skillicons.dev/icons?i=py,docker,kubernetes,aws,githubactions,linux,bash,powershell&theme=dark&perline=8" alt="Python, Docker, Kubernetes, AWS, GitHub Actions, Linux, Bash, and PowerShell" />
 </p>
 
-## 04 / Activity
+## 05 / Activity
 
 The public part of this work continues through benchmark and evaluator pull requests.
 
