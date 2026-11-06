@@ -58,9 +58,9 @@ My public Terminal-Bench contributions include operational decisions and databas
 <!-- harbor-prs:start -->
 **3 pull requests** · [View all on Harbor](https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837)
 
-- [#2115 · Plan claims staffing from an incomplete backlog](https://github.com/harbor-framework/terminal-bench/pull/2115) · `OPEN`
-- [#1985 · Recover coupon substitution trees from delayed fulfillment](https://github.com/harbor-framework/terminal-bench/pull/1985) · `OPEN`
-- [#1969 · Reconcile drifting replicas within a transfer budget](https://github.com/harbor-framework/terminal-bench/pull/1969) · `OPEN`
+- [#2115 · add claims\-backlog\-plan](https://github.com/harbor-framework/terminal-bench/pull/2115) · `OPEN`
+- [#1985 · add stable\-substitution\-tree](https://github.com/harbor-framework/terminal-bench/pull/1985) · `OPEN`
+- [#1969 · add budgeted\-replica\-reconciliation](https://github.com/harbor-framework/terminal-bench/pull/1969) · `OPEN`
 <!-- harbor-prs:end -->
 
 **A closer look at replica reconciliation.**
