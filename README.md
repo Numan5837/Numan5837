@@ -1,59 +1,57 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/main/assets/profile-typewriter-dark.gif" />
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/main/assets/profile-typewriter-light.gif" />
-    <img src="assets/profile-typewriter-dark.gif" width="100%" alt="Numan S. — AI evaluation, verifier engineering, and reproducible infrastructure" />
+    <source media="(prefers-reduced-motion: reduce)" srcset="assets/terminal-console-static.png" />
+    <img src="assets/terminal-console.gif" width="1200" alt="Numan S. — Mercor Real World Engineer, Terminal-Bench Domain Expert. AI evaluation, benchmark engineering, and reproducible systems." />
   </picture>
 </p>
 
 <p align="center">
-  I design research-grounded tasks and containerized benchmarks across mathematics,<br/>machine learning research, operations, and data engineering.
+  <strong>Mercor · Real World Engineer &nbsp; / &nbsp; Terminal-Bench · Domain Expert</strong><br />
+  I turn difficult domain problems into executable tasks, exact verifiers, and reproducible evaluations.
 </p>
 
 <p align="center">
-  <a href="https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837"><img src="https://img.shields.io/badge/Terminal--Bench_contributions-0B6477?style=for-the-badge&logo=gnometerminal&logoColor=white" height="28" alt="My Terminal-Bench pull requests" /></a>&nbsp;
-  <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests"><img src="https://img.shields.io/badge/Open--source_PRs-24292F?style=for-the-badge&logo=github&logoColor=white" height="28" alt="Open-source pull requests" /></a>
+  <a href="https://www.linkedin.com/in/numan-s-b622bb250/"><strong>LinkedIn ↗</strong></a> &nbsp; · &nbsp;
+  <a href="https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837"><strong>Terminal-Bench work ↗</strong></a> &nbsp; · &nbsp;
+  <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests"><strong>Open-source contributions ↗</strong></a>
 </p>
 
-## 01 / AI research & benchmark experience
+---
 
-My work spans benchmark task development with **Handshake AI** and **Turing**, alongside verifier engineering, evaluation infrastructure, and open-source contributions.
+### `01 / whoami`
 
-### Handshake AI · Project Dynamo & Project Insight
+I work at the intersection of **real-world software engineering, AI-agent evaluation, and research-grounded benchmark design**. My focus is the full path from a challenging problem to evidence you can inspect: task specifications, reference solutions, containerized environments, automated grading, and failure analysis.
 
-I worked on **Terminal-Bench 2 through Project Dynamo** and **Terminal-Bench 3 through Project Insight**, developing tasks across **Operations, Mathematics, Machine Learning Research, and Data Engineering**. My focus is turning domain problems into executable challenges with clear instructions, reproducible environments, and outcomes that can be checked.
+| Work | Focus |
+| :--- | :--- |
+| **Mercor**<br />Real World Engineer | Software engineering grounded in real systems, executable workflows, and verifiable outcomes. |
+| **Handshake AI**<br />Project Dynamo · Project Insight | **Terminal-Bench 2 & 3** task development across operations, mathematics, ML research, and data engineering. |
+| **Turing**<br />Domain Expert · Task Development | Scientific and mathematical Terminal-Bench tasks **for Meta**, with reference solutions and independently checkable results. |
 
-| Project | Benchmark | Contribution |
-| --- | --- | --- |
-| **Project Dynamo** | Terminal-Bench 2 | Domain-focused benchmark task development for evaluating AI agents working in terminal environments. |
-| **Project Insight** | Terminal-Bench 3 | Benchmark task development across operations, mathematics, machine learning research, and data engineering. |
+### `02 / domain --expertise`
 
-### Turing · Terminal-Bench tasks for Meta
+| Domain | What I build and evaluate |
+| :--- | :--- |
+| **Mathematics & scientific reasoning** | Research-grounded tasks, applied mathematics, numerical reasoning, proof and certificate verification. |
+| **Machine learning research** | Reproducible experiments, model evaluation, trajectory analysis, and evidence-based interpretation. |
+| **Operations** | Planning under constraints, staffing, backlog decisions, logistics, and resource allocation. |
+| **Data engineering** | Data validation, database reliability, consistency checks, and replica reconciliation. |
+| **Agent infrastructure** | Containerized runtimes, grading pipelines, verifier audits, and cross-platform tooling. |
 
-I work with **Turing on Terminal-Bench tasks for Meta**, including scientific-domain and mathematical benchmark development. This work brings together research-led problem selection, precise task specifications, reference solutions, verifier design, and reproducible execution.
+### `03 / run evaluation_pipeline`
 
-My scientific and mathematics work emphasizes a substantive reasoning challenge: a compact problem whose solution requires the underlying mathematics, with independently checkable results. I develop and review task packages, examine solver trajectories, and use validation evidence to distinguish reasoning failures from verifier defects or infrastructure problems.
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/evaluation-loop-static.png" />
+  <img src="assets/evaluation-loop.gif" width="1200" alt="Evaluation loop: design a domain task, reproduce its runtime, calibrate oracle and controls, evaluate agent trajectories, verify the evidence, then use failure analysis to improve the system." />
+</picture>
 
-### Domains I work in
+**My evaluation standard:** the oracle passes, no-op and shortcut solutions fail, and the result can be checked independently. I distinguish model reasoning failures from verifier defects and infrastructure failures.
 
-| Domain | Task focus |
-| --- | --- |
-| **Scientific domains & Mathematics** | Research-grounded problems, applied mathematics, numerical reasoning, and proof or certificate-based verification. |
-| **Machine Learning Research** | Reproducible research workflows, experiment analysis, model evaluation, and evidence-based interpretation of results. |
-| **Operations** | Planning under constraints, staffing and backlog decisions, logistics, and resource allocation. |
-| **Data Engineering** | Data processing and validation, database reliability, consistency checks, and replica reconciliation. |
+### `04 / ls work/selected`
 
-Across these domains, I connect task design with reference solutions, automated grading, containerized environments, and failure analysis. The public examples below show that workflow in practice.
+#### Terminal-Bench · challenges with checkable outcomes
 
-## 02 / From challenge to evidence
-
-I work from a difficult agent task to the evidence needed to trust its result. The projects below follow that same path: design the challenge, build the grading system, then harden the evaluator.
-
-> **The path:** design → calibrate → grade → analyze → harden
-
-### Step 01 · Design the challenge
-
-My public Terminal-Bench contributions include operational decisions and database reliability challenges with outcomes that can be checked directly. My pull requests to Harbor are listed below and refreshed automatically as their status changes.
+Public task contributions cover **replica reconciliation**, **claims backlog planning**, and **stable substitution trees**. The list below refreshes automatically from GitHub; each entry links to its review and current status.
 
 <!-- harbor-prs:start -->
 **3 pull requests** · [View all on Harbor](https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837)
@@ -63,86 +61,61 @@ My public Terminal-Bench contributions include operational decisions and databas
 - [#1969 · add budgeted\-replica\-reconciliation](https://github.com/harbor-framework/terminal-bench/pull/1969) · `OPEN`
 <!-- harbor-prs:end -->
 
-**A closer look at replica reconciliation.**
-
-I designed a database reliability task that asks an agent to recover exact record drift from compressed replica sketches, choose one retry, and stay within a strict transfer budget.
-
-**Validation:** [Docker validation passed](https://github.com/harbor-framework/terminal-bench/actions/runs/34815816471) &nbsp;·&nbsp; Oracle `1.0` &nbsp;·&nbsp; No-op `0.0`<br/>
-**Model trials:** GPT-5.6 Sol with Terminus-2 via OpenRouter &nbsp;·&nbsp; `0/5`
-
-**[View the pull request →](https://github.com/harbor-framework/terminal-bench/pull/1969)** &nbsp;&nbsp; [Read the failure analysis](https://github.com/harbor-framework/terminal-bench/pull/1969#issuecomment-5661777651)
-
 <details>
-<summary><strong>What the model runs showed</strong></summary>
+<summary><strong>Inside a task: reconcile drifting replicas under a transfer budget</strong></summary>
 
-<br/>
+An agent must recover exact record drift from compact replica sketches, choose one retry, and stay within a strict transfer budget. The task tests decisions near decoder capacity, including opposing drift across routing lanes.
 
-All five trials completed without infrastructure errors. In the two trajectories analyzed in detail, the agent reused one global retry multiplier. That under-sized routed transition cases and overspent when the two routes drifted in opposite directions.
+- **Validation:** [Docker validation passed](https://github.com/harbor-framework/terminal-bench/actions/runs/34815816471); Oracle `1.0`, no-op `0.0`.
+- **Reported model trial set:** GPT-5.6 Sol / Terminus-2 via OpenRouter, `0/5`, with all five trials completing without infrastructure errors.
+- **Observed failure:** in the two trajectories analyzed in detail, one global retry multiplier under-sized transition cases or overspent on opposing drift.
+
+[Read the task PR](https://github.com/harbor-framework/terminal-bench/pull/1969) · [Read the failure analysis](https://github.com/harbor-framework/terminal-bench/pull/1969#issuecomment-5661777651)
 
 </details>
 
-*Once the challenge is calibrated, the next problem is making its grading repeatable.*
+#### Infinity Megatron · enterprise grading
 
-### Step 02 · Build the grading pipeline
+`PRIVATE R&D` &nbsp; I built the enterprise grading layer for an AI-agent evaluation platform: rubric-based artifact scoring, verifier audits, Docker calibration, Pass@k trials, mutation testing, and structured evidence reports.
 
-**Infinity Megatron — enterprise grading** &nbsp;·&nbsp; `PRIVATE R&D`
+#### Gandalf the Grader · evaluator reliability
 
-I built the enterprise grading layer for **Infinity Megatron**, a private AI-agent evaluation platform. The pipeline covers rubric-based artifact scoring, verifier audits, Docker calibration, Pass@k trials, mutation testing, and structured reports.
+`OPEN-SOURCE CONTRIBUTIONS` &nbsp; I submitted patches for Windows process launching, UTF-8-safe I/O, Python 3.12 CI, malformed trajectories, and defensive handling of judge responses.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/main/assets/infinity-grading-flow-dark.gif" />
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/main/assets/infinity-grading-flow-light.gif" />
-    <img src="assets/infinity-grading-flow-dark.gif" width="100%" alt="Infinity Megatron grading pipeline from task intake through evidence" />
-  </picture>
-</p>
+[Explore my submitted patches →](https://github.com/Handshake-AI-Research/gandalf-the-grader/pulls?q=is%3Apr+author%3ANuman5837)
 
-<p align="center"><sub>Private implementation &nbsp;·&nbsp; The animation presents the workflow at a high level.</sub></p>
+### `05 / cat toolkit.toml`
 
-*A repeatable grading pipeline still depends on an evaluator that fails safely.*
+```toml
+[engineering]
+languages = [
+  "Python", "Bash", "PowerShell", "SQL"
+]
+runtime = [
+  "Linux", "Docker", "Kubernetes", "AWS"
+]
+automation = ["Git", "GitHub Actions"]
 
-### Step 03 · Harden the evaluator
+[evaluation]
+tasks = "Terminal-Bench"
+checks = "Exact verifiers + controls"
+trials = "Pass@k + mutation testing"
+analysis = "Trajectories + failures"
+```
 
-**Gandalf the Grader — evaluator reliability** &nbsp;·&nbsp; `OPEN-SOURCE ENGINEERING`
+### `06 / git log --activity`
 
-I submitted targeted patches for cross-platform process launching, UTF-8-safe I/O, Python 3.12 CI, and safe handling of malformed trajectories and judge responses.
-
-**[View the submitted patches →](https://github.com/Handshake-AI-Research/gandalf-the-grader/pulls?q=is%3Apr+author%3ANuman5837)**
-
-## 03 / The evaluation loop
-
-Across these projects, I use one repeatable process:
-
-1. **Frame the capability.** Define the behavior being tested and the exact completion condition.
-2. **Build from controlled state.** Derive expected results from data held by the verifier.
-3. **Calibrate both sides.** Prove the oracle passes and shortcut or no-op solutions fail.
-4. **Protect the evaluation.** Isolate agent code from fixtures, answers, and rewards.
-5. **Study and harden.** Use trajectories to separate capability gaps from task defects, then improve the evaluator.
-
-## 04 / Toolkit
-
-| Evaluate | Reproduce | Automate |
-| --- | --- | --- |
-| Exact verifiers · Pass@k trials · trajectory analysis | Docker · Linux · Kubernetes · AWS | Python · Bash · PowerShell · GitHub Actions |
-
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=py,docker,kubernetes,aws,githubactions,linux,bash,powershell&theme=dark&perline=8" alt="Python, Docker, Kubernetes, AWS, GitHub Actions, Linux, Bash, and PowerShell" />
-</p>
-
-## 05 / Activity
-
-The public part of this work continues through benchmark and evaluator pull requests.
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake-dark.svg?v=activity-1" />
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake.svg?v=activity-1" />
-    <img src="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake-dark.svg?v=activity-1" width="100%" alt="Animated contribution graph with live GitHub activity counters" />
-  </picture>
-</p>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake.svg" />
+  <img src="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake-dark.svg" width="100%" alt="Animated public GitHub contribution history and automatically refreshed activity counters. GitHub's contribution grid below provides a static view." />
+</picture>
 
 ---
 
-<div align="center">
-  <p><strong>Interested in difficult agent evaluations, exact verifiers, and the infrastructure behind trustworthy scores.</strong></p>
-</div>
+<p align="center">
+  <strong>Have a hard agent task or a real-world engineering problem?</strong><br />
+  Let's make the result reproducible.<br /><br />
+  <a href="https://www.linkedin.com/in/numan-s-b622bb250/">Connect on LinkedIn ↗</a> &nbsp; · &nbsp;
+  <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests">Explore my work ↗</a>
+</p>
