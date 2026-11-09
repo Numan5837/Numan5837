@@ -1,10 +1,19 @@
 <p align="center">
+  <a href="https://numan5837-interactive.damplodge64.chatgpt.site">
   <picture>
     <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/hero-v2-mobile-static.svg" />
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/hero-v2-static.svg" />
   <source media="(max-width: 600px)" srcset="assets/hero-v2-mobile.svg" />
-    <img src="assets/hero-v2.svg" width="100%" alt="Numan S. — Mercor Real World Engineer. Terminal-Bench Domain Expert. I build the tests that test AI: hard benchmarks, exact verifiers, and reproducible systems." />
+    <img src="assets/hero-v2.svg" width="100%" alt="Numan S. — Founder of Tbench AI, Mercor Real World Engineer, and Terminal-Bench Domain Expert. Open the website to interact with the hero." />
   </picture>
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://numan5837-interactive.damplodge64.chatgpt.site"><strong>OPEN INTERACTIVE PROFILE ↗</strong></a> &nbsp; / &nbsp;
+  <a href="https://numan5837-interactive.damplodge64.chatgpt.site#arcade"><strong>PLAY PAC-MAN ↗</strong></a> &nbsp; / &nbsp;
+  <a href="https://tbench.in/"><strong>TBENCH AI ↗</strong></a><br />
+  <sub>Open the website to rotate the hero and play. GitHub displays animated previews.</sub>
 </p>
 
 <p align="center">
@@ -15,9 +24,22 @@
 </p>
 
 <p align="center">
-  <strong>Mercor · Real World Engineer &nbsp; / &nbsp; Terminal-Bench · Domain Expert</strong><br />
+  <strong>Tbench AI · Founder &nbsp; / &nbsp; Mercor · Real World Engineer &nbsp; / &nbsp; Terminal-Bench · Domain Expert</strong><br />
   Building real systems. Designing hard evaluations. Making the evidence checkable.
 </p>
+
+### Founder / Tbench AI
+
+I’m the founder of **[Tbench AI](https://tbench.in/)**, building tools for local CI on your own compute, Jira-linked AI repair, retesting, and team approval in Slack. The focus is a reviewable path from a failing check to a retested change.
+
+<a href="https://tbench.in/">
+  <picture>
+    <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/founder-v2-mobile-static.svg" />
+    <source media="(prefers-reduced-motion: reduce)" srcset="assets/founder-v2-static.svg" />
+    <source media="(max-width: 600px)" srcset="assets/founder-v2-mobile.svg" />
+    <img src="assets/founder-v2.svg" width="100%" alt="Numan S., Founder of Tbench AI. Local CI on your compute, Jira-linked AI repair, retesting, and team approval. Visit tbench.in." />
+  </picture>
+</a>
 
 <br />
 
@@ -158,12 +180,17 @@ In the two trajectories analyzed in detail, the agent reused one global retry mu
   <img src="assets/section-arcade.svg" width="100%" alt="04 / Contribution arcade — Serious work. Playful pixels." />
 </picture>
 
+<a href="https://numan5837-interactive.damplodge64.chatgpt.site#arcade">
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/output/contribution-pacman-static.svg" />
-  <img src="https://raw.githubusercontent.com/Numan5837/Numan5837/output/contribution-pacman.svg" width="100%" alt="Pac-Man and three ghosts race through my real GitHub contribution calendar. An animated arcade replay, refreshed daily." />
+  <img src="https://raw.githubusercontent.com/Numan5837/Numan5837/output/contribution-pacman.svg" width="100%" alt="Pac-Man eats my GitHub contribution squares and reveals activity stats. Open the website to play with keyboard or touch controls." />
 </picture>
+</a>
 
-<p align="center"><sub>A Pac-Man replay of real contribution data · Refreshed daily · GitHub's native contribution grid below provides a static view.</sub></p>
+<p align="center">
+  <a href="https://numan5837-interactive.damplodge64.chatgpt.site#arcade"><strong>PLAY PAC-MAN — KEYBOARD + TOUCH ↗</strong></a><br />
+  <sub>This preview replays real contribution data daily. Open the website to play; GitHub’s native contribution grid below provides a static view.</sub>
+</p>
 
 <br />
 
@@ -172,6 +199,8 @@ In the two trajectories analyzed in detail, the agent reused one global retry mu
 <p align="center">
   <strong>Real-world engineering. Research-grounded evaluation.</strong><br />
   Difficult problems, built to be checked.<br /><br />
+  <a href="https://numan5837-interactive.damplodge64.chatgpt.site">INTERACTIVE PROFILE ↗</a> &nbsp; / &nbsp;
+  <a href="https://tbench.in/">TBENCH AI ↗</a> &nbsp; / &nbsp;
   <a href="https://github.com/Numan5837?tab=repositories">REPOSITORIES ↗</a> &nbsp; / &nbsp;
   <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&amp;type=pullrequests">CONTRIBUTIONS ↗</a> &nbsp; / &nbsp;
   <a href="https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837">TERMINAL-BENCH ↗</a>

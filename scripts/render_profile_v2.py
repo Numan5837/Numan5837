@@ -102,7 +102,7 @@ def hero():
     b+=terminal_mark(926,241)
     b+=tx(834,430,'RESEARCH → RUNTIME',16,'mono muted',letter_spacing=1.4)
     # Role ribbon.
-    labels=[('MERCOR','Real World Engineer',CYAN),('TERMINAL-BENCH','Domain Expert',PURPLE),('CORE FOCUS','Agent evaluation',LIME)]
+    labels=[('MERCOR','Real World Engineer',CYAN),('TERMINAL-BENCH','Domain Expert',PURPLE),('TBENCH AI','Founder',LIME)]
     for j,(label,sub,c) in enumerate(labels):
         x=44+j*375
         b+='<path d="M%d 452H%d" stroke="%s" stroke-opacity=".5"/>'%(x,x+345,c)
@@ -120,7 +120,7 @@ def hero():
     b+='</g></g>'
     b+=rect(1041,554,108,24,'#152938','none',6)+tx(1055,571,'WORKFLOW',11,'mono cyan')
     b='<defs><clipPath id="canvas"><rect width="1200" height="660" rx="24"/></clipPath></defs><g clip-path="url(#canvas)">'+b+'</g>'
-    svg('hero-v2',1200,660,b,'Numan S. | Mercor Real World Engineer | Terminal-Bench Domain Expert | Agent evaluation and verifier engineering')
+    svg('hero-v2',1200,660,b,'Numan S. | Founder, Tbench AI | Mercor Real World Engineer | Terminal-Bench Domain Expert')
 
 def navigation():
     entries=[('work','01','SELECTED WORK','M8 8h8v8H8z M12 3v5 M3 12h5 M16 12h5 M12 16v5'),('systems','02','VERIFIER LAB','M4 12l5 5L20 5'),('domains','03','DOMAIN MAP','M3 6h18M3 12h18M3 18h18'),('arcade','04','CONTRIBUTION ARCADE','M7 8h10l4 11-5-3H8l-5 3z M6 12h6 M9 9v6 M16 12h1')]
@@ -181,6 +181,40 @@ def experience():
         # Keep text readable without shrinking three desktop columns.
         for k,line in enumerate(lines):b+=tx(350,y+80+k*35,line,19,'muted')
     svg('experience-v2-mobile',720,650,b,'Mercor Real World Engineer; Handshake AI Terminal-Bench 2 and 3; Turing scientific task development')
+
+def founder():
+    """A linked founder card; product description remains readable in Markdown."""
+    b=rect(1,1,1198,226,'url(#surface)',BORDER,18)
+    b+='<path d="M24 1H370" stroke="url(#neon)" stroke-width="2"/>'
+    b+=tx(28,36,'FOUNDER / BUILDING TBENCH AI',14,'mono lime',letter_spacing=1)
+    b+=tx(28,99,'Tbench AI',50,'',font_weight=750)
+    b+=tx(28,139,'Local CI. AI repair. Retested changes.',22,'muted')
+    b+=tx(28,199,'tbench.in ↗',19,'mono cyan')
+    stages=[('LOCAL CI','Your compute',CYAN),('AI REPAIR','Jira context',PURPLE),('RETEST + REVIEW','Team approval',LIME)]
+    for j,(label,sub,c) in enumerate(stages):
+        x=563+j*204
+        b+=rect(x,76,181,106,'#0b1120',BORDER,12)
+        b+=dot(x+18,98,c,3)+tx(x+18,127,label,15,'mono',font_weight=700)
+        b+=tx(x+18,157,sub,16,'muted')
+        if j<2:
+            p=f'M{x+181} 129h23'
+            b+=f'<path d="{p}" stroke="{c}" stroke-opacity=".5"/>'+packet(p,c,2,j*.4,3)
+    svg('founder-v2',1200,228,b,'Numan S., Founder of Tbench AI: local CI on your compute, Jira-linked AI repair, retesting, and team approval. Visit tbench.in.')
+    b=rect(1,1,718,398,'url(#surface)',BORDER,18)
+    b+='<path d="M24 1H370" stroke="url(#neon)" stroke-width="2"/>'
+    b+=tx(28,39,'FOUNDER / BUILDING TBENCH AI',18,'mono lime',letter_spacing=.7)
+    b+=tx(28,104,'Tbench AI',55,'',font_weight=750)
+    b+=tx(28,148,'Local CI. AI repair. Retested changes.',24,'muted')
+    for j,(label,sub,c) in enumerate(stages):
+        x=28+j*229
+        b+=rect(x,197,206,117,'#0b1120',BORDER,12)
+        b+=dot(x+17,222,c,4)+tx(x+17,254,label,18,'mono',font_weight=700)
+        b+=tx(x+17,286,sub,19,'muted')
+        if j<2:
+            p=f'M{x+206} 254h23'
+            b+=f'<path d="{p}" stroke="{c}" stroke-opacity=".5"/>'+packet(p,c,2,j*.4,3)
+    b+=tx(28,369,'tbench.in ↗',22,'mono cyan')
+    svg('founder-v2-mobile',720,400,b,'Numan S., Founder of Tbench AI. Local CI, Jira-linked AI repair, retesting, and team approval. Visit tbench.in.')
 
 def domains():
     entries=[('01','Mathematics','Proofs. Numerical reasoning.','Exact, checkable certificates.',CYAN),('02','ML research','Reproducible experiments.','Model and trajectory analysis.',PURPLE),('03','Operations','Planning under constraints.','Backlogs, staffing, allocation.',LIME),('04','Data engineering','Reliable data and databases.','Consistency & reconciliation.',CYAN),('05','Agent systems','Terminal execution & tooling.','Isolation and container runtimes.',PURPLE),('06','Verifier engineering','Oracle, no-op, mutation checks.','Defensible scores and evidence.',LIME)]
@@ -263,7 +297,7 @@ def section(name,n,title,subtitle):
     svg('section-'+name+'-mobile',720,225,b,title)
 
 def main():
-    hero();mobile_hero();navigation();experience();domains();verifier()
+    hero();mobile_hero();navigation();founder();experience();domains();verifier()
     for args in [('work','01 / THE WORK','Engineering, with receipts.','Public task contributions, private evaluation systems, and open-source patches.'),('systems','02 / UNDER THE HOOD','From terminal to trustworthy.','Execution is the beginning. Verification is the work.'),('domains','03 / EXPERTISE','Different domains. The same rigor.','Research-grounded challenges. Explicit constraints. Independently checkable outcomes.'),('arcade','04 / OFF THE CLOCK','Serious work. Playful pixels.','My contribution history, reimagined as an arcade.')]:section(*args)
 
 if __name__=='__main__':main()

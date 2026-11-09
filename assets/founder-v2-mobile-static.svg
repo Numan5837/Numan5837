@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400" role="img"><title>Numan S., Founder of Tbench AI. Local CI, Jira-linked AI repair, retesting, and team approval. Visit tbench.in.</title><defs>
+<linearGradient id="ink"><stop stop-color="#fbfcff"/><stop offset=".52" stop-color="#bbc5ff"/><stop offset="1" stop-color="#79edee"/></linearGradient>
+<linearGradient id="neon" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6aeef3"/><stop offset=".48" stop-color="#8b8dff"/><stop offset="1" stop-color="#d999ff"/></linearGradient>
+<radialGradient id="aura"><stop stop-color="#6044ce" stop-opacity=".38"/><stop offset="1" stop-color="#6044ce" stop-opacity="0"/></radialGradient>
+<radialGradient id="cyanAura"><stop stop-color="#137f97" stop-opacity=".28"/><stop offset="1" stop-color="#137f97" stop-opacity="0"/></radialGradient>
+<linearGradient id="surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#171e35"/><stop offset="1" stop-color="#0d1221"/></linearGradient>
+<filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="5"/></filter>
+<pattern id="dots" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#99a9f0" opacity=".11"/></pattern>
+</defs>
+<style>
+text{font-family:'Segoe UI',Arial,sans-serif;fill:#f1f5ff}
+.mono{font-family:Consolas,'DejaVu Sans Mono',monospace}
+.muted{fill:#9faec9}.cyan{fill:#62edee}.purple{fill:#a98aff}.lime{fill:#c5f784}
+.dash{stroke-dasharray:5 10;animation:dash 24s linear infinite}
+.breathe{animation:breathe 4s ease-in-out infinite}
+@keyframes dash{to{stroke-dashoffset:-180}}
+@keyframes breathe{50%{opacity:.38}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+*{animation:none!important}</style><rect x="1" y="1" width="718" height="398" rx="18" fill="url(#surface)" stroke="#27324b" /><path d="M24 1H370" stroke="url(#neon)" stroke-width="2"/><text x="28" y="39" font-size="18" class="mono lime" letter-spacing="0.7">FOUNDER / BUILDING TBENCH AI</text><text x="28" y="104" font-size="55" class="" font-weight="750">Tbench AI</text><text x="28" y="148" font-size="24" class="muted" >Local CI. AI repair. Retested changes.</text><rect x="28" y="197" width="206" height="117" rx="12" fill="#0b1120" stroke="#27324b" /><circle cx="45" cy="222" r="4" fill="#62edee"/><text x="45" y="254" font-size="18" class="mono" font-weight="700">LOCAL CI</text><text x="45" y="286" font-size="19" class="muted" >Your compute</text><path d="M234 254h23" stroke="#62edee" stroke-opacity=".5"/><rect x="257" y="197" width="206" height="117" rx="12" fill="#0b1120" stroke="#27324b" /><circle cx="274" cy="222" r="4" fill="#a98aff"/><text x="274" y="254" font-size="18" class="mono" font-weight="700">AI REPAIR</text><text x="274" y="286" font-size="19" class="muted" >Jira context</text><path d="M463 254h23" stroke="#a98aff" stroke-opacity=".5"/><rect x="486" y="197" width="206" height="117" rx="12" fill="#0b1120" stroke="#27324b" /><circle cx="503" cy="222" r="4" fill="#c5f784"/><text x="503" y="254" font-size="18" class="mono" font-weight="700">RETEST + REVIEW</text><text x="503" y="286" font-size="19" class="muted" >Team approval</text><text x="28" y="369" font-size="22" class="mono cyan" >tbench.in ↗</text></svg>
