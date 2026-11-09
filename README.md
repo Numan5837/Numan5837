@@ -1,57 +1,55 @@
 <p align="center">
   <picture>
-    <source media="(prefers-reduced-motion: reduce)" srcset="assets/terminal-console-static.png" />
-    <img src="assets/terminal-console.gif" width="1200" alt="Numan S. — Mercor Real World Engineer, Terminal-Bench Domain Expert. AI evaluation, benchmark engineering, and reproducible systems." />
+    <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/hero-v2-mobile-static.svg" />
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/hero-v2-static.svg" />
+  <source media="(max-width: 600px)" srcset="assets/hero-v2-mobile.svg" />
+    <img src="assets/hero-v2.svg" width="100%" alt="Numan S. — Mercor Real World Engineer. Terminal-Bench Domain Expert. I build the tests that test AI: hard benchmarks, exact verifiers, and reproducible systems." />
   </picture>
 </p>
 
 <p align="center">
-  <strong>Mercor · Real World Engineer &nbsp; / &nbsp; Terminal-Bench · Domain Expert</strong><br />
-  I turn difficult domain problems into executable tasks, exact verifiers, and reproducible evaluations.
+  <a href="#selected-work"><picture><source media="(max-width: 600px)" srcset="assets/nav-work-mobile.svg" /><img src="assets/nav-work.svg" width="24%" alt="Selected work" /></picture></a>
+  <a href="#verifier-lab"><picture><source media="(max-width: 600px)" srcset="assets/nav-systems-mobile.svg" /><img src="assets/nav-systems.svg" width="24%" alt="Verifier lab" /></picture></a>
+  <a href="#domain-map"><picture><source media="(max-width: 600px)" srcset="assets/nav-domains-mobile.svg" /><img src="assets/nav-domains.svg" width="24%" alt="Domain map" /></picture></a>
+  <a href="#contribution-arcade"><picture><source media="(max-width: 600px)" srcset="assets/nav-arcade-mobile.svg" /><img src="assets/nav-arcade.svg" width="24%" alt="Contribution arcade" /></picture></a>
 </p>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/numan-s-b622bb250/"><strong>LinkedIn ↗</strong></a> &nbsp; · &nbsp;
-  <a href="https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837"><strong>Terminal-Bench work ↗</strong></a> &nbsp; · &nbsp;
-  <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests"><strong>Open-source contributions ↗</strong></a>
+  <strong>Mercor · Real World Engineer &nbsp; / &nbsp; Terminal-Bench · Domain Expert</strong><br />
+  Building real systems. Designing hard evaluations. Making the evidence checkable.
 </p>
 
----
-
-### `01 / whoami`
-
-I work at the intersection of **real-world software engineering, AI-agent evaluation, and research-grounded benchmark design**. My focus is the full path from a challenging problem to evidence you can inspect: task specifications, reference solutions, containerized environments, automated grading, and failure analysis.
-
-| Work | Focus |
-| :--- | :--- |
-| **Mercor**<br />Real World Engineer | Software engineering grounded in real systems, executable workflows, and verifiable outcomes. |
-| **Handshake AI**<br />Project Dynamo · Project Insight | **Terminal-Bench 2 & 3** task development across operations, mathematics, ML research, and data engineering. |
-| **Turing**<br />Domain Expert · Task Development | Scientific and mathematical Terminal-Bench tasks **for Meta**, with reference solutions and independently checkable results. |
-
-### `02 / domain --expertise`
-
-| Domain | What I build and evaluate |
-| :--- | :--- |
-| **Mathematics & scientific reasoning** | Research-grounded tasks, applied mathematics, numerical reasoning, proof and certificate verification. |
-| **Machine learning research** | Reproducible experiments, model evaluation, trajectory analysis, and evidence-based interpretation. |
-| **Operations** | Planning under constraints, staffing, backlog decisions, logistics, and resource allocation. |
-| **Data engineering** | Data validation, database reliability, consistency checks, and replica reconciliation. |
-| **Agent infrastructure** | Containerized runtimes, grading pipelines, verifier audits, and cross-platform tooling. |
-
-### `03 / run evaluation_pipeline`
+<br />
 
 <picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="assets/evaluation-loop-static.png" />
-  <img src="assets/evaluation-loop.gif" width="1200" alt="Evaluation loop: design a domain task, reproduce its runtime, calibrate oracle and controls, evaluate agent trajectories, verify the evidence, then use failure analysis to improve the system." />
+  <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/experience-v2-mobile-static.svg" />
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/experience-v2-static.svg" />
+  <source media="(max-width: 600px)" srcset="assets/experience-v2-mobile.svg" />
+  <img src="assets/experience-v2.svg" width="100%" alt="Experience: Mercor — Real World Engineer; Handshake AI — Project Dynamo and Project Insight, Terminal-Bench 2 and 3; Turing — scientific and mathematical task development for Meta." />
 </picture>
 
-**My evaluation standard:** the oracle passes, no-op and shortcut solutions fail, and the result can be checked independently. I distinguish model reasoning failures from verifier defects and infrastructure failures.
+<details>
+<summary><strong>The experience behind the interface</strong></summary>
 
-### `04 / ls work/selected`
+- **Mercor · Real World Engineer:** software engineering grounded in real systems, executable workflows, and verifiable outcomes.
+- **Handshake AI · Project Dynamo & Project Insight:** Terminal-Bench 2 and 3 task development across operations, mathematics, machine learning research, and data engineering.
+- **Turing · Domain Expert:** scientific and mathematical Terminal-Bench tasks for Meta, connecting research-led problem selection, precise specifications, reference solutions, and reproducible verification.
 
-#### Terminal-Bench · challenges with checkable outcomes
+I turn difficult domain problems into executable challenges, then build the environments and verifiers needed to evaluate them reliably.
 
-Public task contributions cover **replica reconciliation**, **claims backlog planning**, and **stable substitution trees**. The list below refreshes automatically from GitHub; each entry links to its review and current status.
+</details>
+
+<br />
+
+<a id="selected-work"></a>
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/section-work-mobile.svg" />
+  <img src="assets/section-work.svg" width="100%" alt="01 / Selected work — Engineering, with receipts." />
+</picture>
+
+### Terminal-Bench / task engineering
+
+Public contributions in **replica reconciliation**, **claims backlog planning**, and **stable substitution trees**. Each link opens the task, validation evidence, and review discussion. Statuses refresh automatically.
 
 <!-- harbor-prs:start -->
 **3 pull requests** · [View all on Harbor](https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837)
@@ -62,60 +60,128 @@ Public task contributions cover **replica reconciliation**, **claims backlog pla
 <!-- harbor-prs:end -->
 
 <details>
-<summary><strong>Inside a task: reconcile drifting replicas under a transfer budget</strong></summary>
+<summary><strong>Case study / exact replica reconciliation under a transfer budget</strong></summary>
 
-An agent must recover exact record drift from compact replica sketches, choose one retry, and stay within a strict transfer budget. The task tests decisions near decoder capacity, including opposing drift across routing lanes.
+An agent must recover exact record drift from compact replica sketches, choose one retry, and stay within a strict transfer budget, including cases with opposing drift across routing lanes.
 
-- **Validation:** [Docker validation passed](https://github.com/harbor-framework/terminal-bench/actions/runs/34815816471); Oracle `1.0`, no-op `0.0`.
-- **Reported model trial set:** GPT-5.6 Sol / Terminus-2 via OpenRouter, `0/5`, with all five trials completing without infrastructure errors.
-- **Observed failure:** in the two trajectories analyzed in detail, one global retry multiplier under-sized transition cases or overspent on opposing drift.
+| Check | Recorded evidence |
+| :--- | :--- |
+| [Docker validation](https://github.com/harbor-framework/terminal-bench/actions/runs/34815816471) | Passed |
+| Reference oracle / no-op | `1.0` / `0.0` |
+| Reported model trial set | GPT-5.6 Sol + Terminus-2 via OpenRouter: `0/5` |
+| Infrastructure | All five trials completed without infrastructure errors |
 
-[Read the task PR](https://github.com/harbor-framework/terminal-bench/pull/1969) · [Read the failure analysis](https://github.com/harbor-framework/terminal-bench/pull/1969#issuecomment-5661777651)
+In the two trajectories analyzed in detail, the agent reused one global retry multiplier: it under-sized transition cases and overspent when routes drifted in opposite directions. This is a result for that reported trial set.
+
+[Read the task PR →](https://github.com/harbor-framework/terminal-bench/pull/1969) · [Read the failure analysis →](https://github.com/harbor-framework/terminal-bench/pull/1969#issuecomment-5661777651)
 
 </details>
 
-#### Infinity Megatron · enterprise grading
+<br />
+
+### Infinity Megatron / enterprise grading
 
 `PRIVATE R&D` &nbsp; I built the enterprise grading layer for an AI-agent evaluation platform: rubric-based artifact scoring, verifier audits, Docker calibration, Pass@k trials, mutation testing, and structured evidence reports.
 
-#### Gandalf the Grader · evaluator reliability
+<picture>
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)" srcset="assets/infinity-grading-flow-light-static.png" />
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/infinity-grading-flow-dark-static.png" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/infinity-grading-flow-light.gif" />
+  <img src="assets/infinity-grading-flow-dark.gif" width="100%" alt="Original Infinity Megatron enterprise grading animation: task intake, verifier audit, oracle and mutation calibration, repeatable Pass@k grading, and packaged evidence." />
+</picture>
 
-`OPEN-SOURCE CONTRIBUTIONS` &nbsp; I submitted patches for Windows process launching, UTF-8-safe I/O, Python 3.12 CI, malformed trajectories, and defensive handling of judge responses.
+<p align="center"><sub>Private implementation · The animation presents the workflow at a high level.</sub></p>
+
+### Gandalf the Grader / evaluator reliability
+
+`OPEN-SOURCE CONTRIBUTIONS` &nbsp; Submitted patches for Windows process launching, UTF-8-safe I/O, Python 3.12 CI, malformed trajectories, and defensive handling of judge responses.
 
 [Explore my submitted patches →](https://github.com/Handshake-AI-Research/gandalf-the-grader/pulls?q=is%3Apr+author%3ANuman5837)
 
-### `05 / cat toolkit.toml`
+<br />
 
-```toml
-[engineering]
-languages = [
-  "Python", "Bash", "PowerShell", "SQL"
-]
-runtime = [
-  "Linux", "Docker", "Kubernetes", "AWS"
-]
-automation = ["Git", "GitHub Actions"]
-
-[evaluation]
-tasks = "Terminal-Bench"
-checks = "Exact verifiers + controls"
-trials = "Pass@k + mutation testing"
-analysis = "Trajectories + failures"
-```
-
-### `06 / git log --activity`
+<a id="verifier-lab"></a>
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/section-systems-mobile.svg" />
+  <img src="assets/section-systems.svg" width="100%" alt="02 / Verifier lab — From terminal to trustworthy." />
+</picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake.svg" />
-  <img src="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake-dark.svg" width="100%" alt="Animated public GitHub contribution history and automatically refreshed activity counters. GitHub's contribution grid below provides a static view." />
+  <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/verifier-lab-mobile-static.svg" />
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/verifier-lab-static.svg" />
+  <source media="(max-width: 600px)" srcset="assets/verifier-lab-mobile.svg" />
+  <img src="assets/verifier-lab.svg" width="100%" alt="Animated verification graph: task package to sandbox to agent run; parallel exact checks, rubric judging, and adversarial controls converge on an evidence report, with a failure-analysis loop. Illustrative workflow." />
 </picture>
+
+**My standard:** the oracle passes; no-op and shortcut solutions fail; agent code is isolated from verifier-owned truth. A reasoning failure, a verifier defect, and an infrastructure failure each require a different diagnosis.
+
+<br />
+
+<a id="domain-map"></a>
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/section-domains-mobile.svg" />
+  <img src="assets/section-domains.svg" width="100%" alt="03 / Expertise — Different domains. The same rigor." />
+</picture>
+
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/domains-v2-mobile.svg" />
+  <img src="assets/domains-v2.svg" width="100%" alt="Domain expertise: mathematics and scientific reasoning, machine learning research, operations, data engineering, agent infrastructure, and verifier engineering." />
+</picture>
+
+<details>
+<summary><strong>Explore the domain map</strong></summary>
+
+| Domain | Task focus |
+| :--- | :--- |
+| **Mathematics & science** | Research-grounded problems, applied mathematics, numerical reasoning, proof and certificate verification. |
+| **ML research** | Reproducible experiments, model evaluation, trajectory analysis, and evidence-based interpretation. |
+| **Operations** | Planning under constraints, staffing, backlog decisions, logistics, and resource allocation. |
+| **Data engineering** | Data validation, database reliability, consistency checks, and replica reconciliation. |
+| **Agent infrastructure** | Terminal execution, containerized runtimes, grading pipelines, and cross-platform tooling. |
+| **Verifier engineering** | Reference solutions, exact checks, oracle and no-op controls, mutation testing, and evidence reports. |
+
+</details>
+
+<br />
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=py,docker,kubernetes,aws,linux,bash,powershell,githubactions,git&amp;theme=dark&amp;perline=9" alt="Python, Docker, Kubernetes, AWS, Linux, Bash, PowerShell, GitHub Actions, and Git" />
+</p>
+
+<p align="center"><code>Python</code> &nbsp; <code>SQL</code> &nbsp; <code>Linux</code> &nbsp; <code>Docker</code> &nbsp; <code>Exact verifiers</code> &nbsp; <code>Pass@k</code></p>
+
+<br />
+
+<a id="contribution-arcade"></a>
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/section-arcade-mobile.svg" />
+  <img src="assets/section-arcade.svg" width="100%" alt="04 / Contribution arcade — Serious work. Playful pixels." />
+</picture>
+
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/output/contribution-pacman-static.svg" />
+  <img src="https://raw.githubusercontent.com/Numan5837/Numan5837/output/contribution-pacman.svg" width="100%" alt="Pac-Man and three ghosts race through my real GitHub contribution calendar. An animated arcade replay, refreshed daily." />
+</picture>
+
+<br />
+
+#### Snake / the original commit trail
+
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake.svg" />
+  <img src="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake-dark.svg" width="100%" alt="Original animated contribution snake with automatically refreshed GitHub activity counters." />
+</picture>
+
+<p align="center"><sub>Game-style animations of real contribution data · Refreshed daily · GitHub's native contribution grid below provides a static view.</sub></p>
+
+<br />
 
 ---
 
 <p align="center">
-  <strong>Have a hard agent task or a real-world engineering problem?</strong><br />
-  Let's make the result reproducible.<br /><br />
-  <a href="https://www.linkedin.com/in/numan-s-b622bb250/">Connect on LinkedIn ↗</a> &nbsp; · &nbsp;
-  <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&type=pullrequests">Explore my work ↗</a>
+  <strong>Real-world engineering. Research-grounded evaluation.</strong><br />
+  Difficult problems, built to be checked.<br /><br />
+  <a href="https://github.com/Numan5837?tab=repositories">REPOSITORIES ↗</a> &nbsp; / &nbsp;
+  <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&amp;type=pullrequests">CONTRIBUTIONS ↗</a> &nbsp; / &nbsp;
+  <a href="https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837">TERMINAL-BENCH ↗</a>
 </p>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="288" height="84" viewBox="0 0 288 84" role="img"><title>SELECTED WORK</title><defs>
+<linearGradient id="ink"><stop stop-color="#fbfcff"/><stop offset=".52" stop-color="#bbc5ff"/><stop offset="1" stop-color="#79edee"/></linearGradient>
+<linearGradient id="neon" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6aeef3"/><stop offset=".48" stop-color="#8b8dff"/><stop offset="1" stop-color="#d999ff"/></linearGradient>
+<radialGradient id="aura"><stop stop-color="#6044ce" stop-opacity=".38"/><stop offset="1" stop-color="#6044ce" stop-opacity="0"/></radialGradient>
+<radialGradient id="cyanAura"><stop stop-color="#137f97" stop-opacity=".28"/><stop offset="1" stop-color="#137f97" stop-opacity="0"/></radialGradient>
+<linearGradient id="surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#171e35"/><stop offset="1" stop-color="#0d1221"/></linearGradient>
+<filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="5"/></filter>
+<pattern id="dots" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#99a9f0" opacity=".11"/></pattern>
+</defs>
+<style>
+text{font-family:'Segoe UI',Arial,sans-serif;fill:#f1f5ff}
+.mono{font-family:Consolas,'DejaVu Sans Mono',monospace}
+.muted{fill:#9faec9}.cyan{fill:#62edee}.purple{fill:#a98aff}.lime{fill:#c5f784}
+.dash{stroke-dasharray:5 10;animation:dash 24s linear infinite}
+.breathe{animation:breathe 4s ease-in-out infinite}
+@keyframes dash{to{stroke-dashoffset:-180}}
+@keyframes breathe{50%{opacity:.38}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style><rect x="1" y="1" width="287" height="82" rx="12" fill="url(#surface)" stroke="#27324b" /><text x="24" y="54" font-size="30" class="mono" font-weight="700">WORK</text><text x="244" y="52" font-size="26" class="cyan" >↗</text></svg>
