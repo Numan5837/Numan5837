@@ -163,16 +163,7 @@ In the two trajectories analyzed in detail, the agent reused one global retry mu
   <img src="https://raw.githubusercontent.com/Numan5837/Numan5837/output/contribution-pacman.svg" width="100%" alt="Pac-Man and three ghosts race through my real GitHub contribution calendar. An animated arcade replay, refreshed daily." />
 </picture>
 
-<br />
-
-#### Snake / the original commit trail
-
-<picture>
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake.svg" />
-  <img src="https://raw.githubusercontent.com/Numan5837/Numan5837/output/github-contribution-grid-snake-dark.svg" width="100%" alt="Original animated contribution snake with automatically refreshed GitHub activity counters." />
-</picture>
-
-<p align="center"><sub>Game-style animations of real contribution data · Refreshed daily · GitHub's native contribution grid below provides a static view.</sub></p>
+<p align="center"><sub>A Pac-Man replay of real contribution data · Refreshed daily · GitHub's native contribution grid below provides a static view.</sub></p>
 
 <br />
 

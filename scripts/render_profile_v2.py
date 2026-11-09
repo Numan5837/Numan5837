@@ -44,6 +44,10 @@ def rect(x,y,w,h,fill=PANEL,stroke=BORDER,r=18,**kw):
 def dot(x,y,c=CYAN,r=4):
     return f'<circle cx="{x}" cy="{y}" r="{r}" fill="{c}"/>'
 
+def terminal_mark(cx,cy):
+    """A clean terminal glyph, with no text label inside the hero artwork."""
+    return rect(cx-37,cy-33,74,66,'#10172c','#51618d',14)+f'<path d="M{cx-17} {cy-11}l11 11-11 11M{cx+1} {cy+12}h17" fill="none" stroke="{CYAN}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'
+
 def packet(path,color=CYAN,dur=6,begin=0,r=4):
     return f'<circle r="{r}" fill="{color}"><animateMotion path="{path}" dur="{dur}s" begin="{begin}s" repeatCount="indefinite"/></circle>'
 
@@ -95,8 +99,7 @@ def hero():
     b+=f'<path d="{knot(0)}" fill="none" stroke="url(#neon)" stroke-width="4.5" stroke-linejoin="round">{animate}</path>'
     b+='<ellipse cx="926" cy="241" rx="219" ry="69" fill="none" stroke="#5273a2" stroke-width="1" class="dash" transform="rotate(-24 926 241)"/>'
     b+=packet('M707 241 C707 107 1145 107 1145 241 C1145 375 707 375 707 241',LIME,12,r=5)
-    b+=rect(824,214,204,56,'#10172c','#51618d',12)
-    b+=tx(849,250,'>_ eval.kernel',20,'mono cyan')
+    b+=terminal_mark(926,241)
     b+=tx(834,430,'RESEARCH → RUNTIME',16,'mono muted',letter_spacing=1.4)
     # Role ribbon.
     labels=[('MERCOR','Real World Engineer',CYAN),('TERMINAL-BENCH','Domain Expert',PURPLE),('CORE FOCUS','Agent evaluation',LIME)]
@@ -147,7 +150,7 @@ def mobile_hero():
     b+=f'<path d="{knot(0)}" fill="none" stroke="url(#neon)" stroke-width="5">{animate}</path>'
     b+='<ellipse cx="926" cy="241" rx="232" ry="77" fill="none" stroke="#657ba7" class="dash" transform="rotate(-24 926 241)"/>'
     b+=packet('M707 241 C707 107 1145 107 1145 241 C1145 375 707 375 707 241',LIME,12,r=6)
-    b+=rect(821,209,210,62,'#10172c','#51618d',12)+tx(843,250,'>_ eval.kernel',21,'mono cyan')+'</g>'
+    b+=terminal_mark(926,241)+'</g>'
     for x,label,role,c in [(32,'MERCOR','Real World Engineer',CYAN),(380,'TERMINAL-BENCH','Domain Expert',PURPLE)]:
         b+=f'<path d="M{x} 697h306" stroke="{c}" stroke-opacity=".5"/>'
         b+=tx(x,728,label,15,'mono',style=f'fill:{c}',letter_spacing=1)+tx(x,766,role,26,'',font_weight=650)

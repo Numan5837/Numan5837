@@ -12,7 +12,7 @@ Requires Python 3.10 or later and only the standard library. It generates the an
 
 ## Contribution arcade
 
-`contribution-snake.yml` maintains both the original contribution snake and the Pac-Man calendar on the `output` branch. Pac-Man uses actual calendar counts from GitHub GraphQL and creates a static calendar alongside the animation. It is an animated replay, not a playable embedded game.
+The Pac-Man workflow (retaining its existing `contribution-snake.yml` filename for workflow continuity) maintains the Pac-Man calendar on the `output` branch. Pac-Man uses actual calendar counts from GitHub GraphQL and creates a static calendar alongside the animation. The README asset is an animated replay; browser game controls require a companion website because GitHub READMEs do not run JavaScript. Snake is no longer displayed or generated.
 
 ```sh
 python scripts/render_arcade.py --username Numan5837 --output dist/contribution-pacman.svg
@@ -22,7 +22,7 @@ The workflow supplies `GITHUB_TOKEN`. For offline checks, provide a saved contri
 
 ## Preserved artwork
 
-The original Infinity Megatron grading GIFs remain in the README, with separate light/dark variants and static PNG fallbacks. Their renderer is `render_enterprise_grading.py` (requires Pillow). The original snake and live public-activity counters remain maintained by the existing scripts and workflow.
+The original Infinity Megatron grading GIFs remain in the README, with separate light/dark variants and static PNG fallbacks. Their renderer is `render_enterprise_grading.py` (requires Pillow). The new verifier graph remains animated. The desktop and mobile hero marks are unlabeled terminal glyphs.
 
 ## Review before publishing
 

@@ -1,4 +1,4 @@
-name: Generate contribution snake
+name: Refresh contribution Pac-Man
 
 on:
   schedule:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: contribution-snake
+  group: contribution-arcade
   cancel-in-progress: true
 
 jobs:
@@ -23,24 +23,6 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
-
-      - name: Generate themed contribution animations
-        uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3.5.0
-        with:
-          github_user_name: ${{ github.repository_owner }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          outputs: |
-            dist/github-contribution-grid-snake.svg?palette=github-light&color_snake=#3b82f6&color_dots=#ebedf0,#c6f6ed,#7fe3d0,#68a5ff,#8b5cf6
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=#55e6cc&color_dots=#161b22,#0e3437,#176c6b,#3d7bd9,#a886ff
-
-      - name: Add live activity counters
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: >-
-          python scripts/enhance_contribution_snake.py
-          --username "${{ github.repository_owner }}"
-          --light dist/github-contribution-grid-snake.svg
-          --dark dist/github-contribution-grid-snake-dark.svg
 
       - name: Render contribution Pac-Man arcade
         env:
