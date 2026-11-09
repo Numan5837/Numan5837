@@ -10,10 +10,9 @@
 </p>
 
 <p align="center">
-  <a href="https://numan5837-interactive.damplodge64.chatgpt.site"><strong>OPEN INTERACTIVE PROFILE ↗</strong></a> &nbsp; / &nbsp;
-  <a href="https://numan5837-interactive.damplodge64.chatgpt.site#arcade"><strong>PLAY PAC-MAN ↗</strong></a> &nbsp; / &nbsp;
-  <a href="https://tbench.in/"><strong>TBENCH AI ↗</strong></a><br />
-  <sub>Open the website to rotate the hero and play. GitHub displays animated previews.</sub>
+  <a href="https://www.linkedin.com/in/numan-s-b622bb250/"><strong>LinkedIn ↗</strong></a> &nbsp; / &nbsp;
+  <a href="https://github.com/search?q=is%3Apr+author%3ANuman5837&amp;type=pullrequests"><strong>Open-source contributions ↗</strong></a> &nbsp; / &nbsp;
+  <a href="https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837"><strong>Terminal-Bench ↗</strong></a>
 </p>
 
 <p align="center">
