@@ -76,8 +76,8 @@ Public contributions in **replica reconciliation**, **claims backlog planning**,
 **3 pull requests** · [View all on Harbor](https://github.com/harbor-framework/terminal-bench/pulls?q=is%3Apr+author%3ANuman5837)
 
 - [#2115 · add claims\-backlog\-plan](https://github.com/harbor-framework/terminal-bench/pull/2115) · `OPEN`
-- [#1985 · add stable\-substitution\-tree](https://github.com/harbor-framework/terminal-bench/pull/1985) · `OPEN`
-- [#1969 · add budgeted\-replica\-reconciliation](https://github.com/harbor-framework/terminal-bench/pull/1969) · `OPEN`
+- [#1985 · add stable\-substitution\-tree](https://github.com/harbor-framework/terminal-bench/pull/1985) · `CLOSED`
+- [#1969 · add budgeted\-replica\-reconciliation](https://github.com/harbor-framework/terminal-bench/pull/1969) · `CLOSED`
 <!-- harbor-prs:end -->
 
 <details>
